@@ -6,17 +6,29 @@
     text-decoration-style: none;
 }
 
+:root{
+    font-size: 16px;
+}
+
 body, html{
     min-height: 100%;
     width: 100%;
 }
 
-:root{
-    font-size: 16px;
+body{
+    background-color: hsl(29, 46%, 93%);
+    padding-top: 4em;
+    padding-bottom: 7em;
 }
 
 header{
-    background-color: lightgray;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: hsl(29, 46%, 50%);
+    color: hsl(29, 46%, 90%);
+    border-bottom: hsl(29, 46%, 20%) solid 2px;
     height: 4em;
 }
 
@@ -34,17 +46,26 @@ header h1{
 
 main{
     padding-top: 0.5em;
+    scroll-margin-bottom: 400px;
 }
 
 div.chatbox{
-    margin: 0.5em 0.5em;
+    margin: 0.5em 1em;
     padding: 1em 1em;
-    border: black solid 2px;
+    border: black solid 1px;
     border-radius: 1em;
 }
 
-div.chatbox p{
-    line-height: 1.2;
+div.chatbox.user{
+    background-color: hsl(29, 46%, 88%);
+}
+
+div.chatbox.ai{
+    background-color: hsl(29, 45%, 88%);
+}
+
+div.chatbox *{
+    line-height: 1.5em;
 }
 
 ol{
@@ -60,6 +81,7 @@ div#inputContainer{
     width: 100%;
     padding: 1em;
     bottom: 0;
+    background-color: hsl(29, 46%, 93%);
 }
 
 div#keywordContainer{
@@ -68,9 +90,15 @@ div#keywordContainer{
 
 div#keywordContainer > div.keyword{
     display: inline-block;
-    background-color: lightgrey;
-    padding: 0.3em;
+    background-color: hsl(29, 46%, 80%);
+    text-align: center;
+    padding: 0.3em 0.5em;
+    min-width: 4ch;
     border-radius: 0.3em;
+}
+
+div#keywordContainer > div.keyword:hover{
+    background-color: hsl(29, 46%, 60%);
 }
 
 div.keyword > button{
@@ -95,10 +123,20 @@ div#textInputContainer textarea{
     flex: 1;
     resize: none;
     border-radius: 0.5em;
-    border: solid 1px black;
+    border: solid 1px hsl(29, 46%, 10%);
+    background-color: hsl(29, 46%, 93%);
+}
+
+div#textInputContainer textarea:focus{
+    /* outline: hsl(29, 46%, 10%) solid 1px; */
+    outline: none;
+    /* border: solid 1px red; */
+    box-shadow: none;
 }
 
 div#textInputContainer button{
+    background-color: hsl(29, 46%, 50%);
+    color: hsl(29, 46%, 93%);
     display: block;
     width: 2.5rem;
     height: 2.5rem;
@@ -106,15 +144,133 @@ div#textInputContainer button{
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.5em;
+    border-radius: 50%;
     border: solid 1px black;
+}
+
+div#textInputContainer button:hover{
+    background-color: hsl(29, 46%, 40%);
 }
 
 button#plusButton > div{
     font-size: 2em;
-    bottom: 0.05em;
+    bottom: 0.08em;
 }
 
 button#sendButton > div{
     font-size: 1.2em;
+    bottom: 0.02em;
+    left: 0.01em;
+}
+
+div#darkOverlay{
+    position: fixed;
+    z-index: 150;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 40%;
+}
+
+div#darkOverlay.hidden{
+    display: none;
+    opacity: 0%;
+}
+
+div#recomendationPopUp{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 200;
+    transform: translate(-50%, -50%) scale(1);
+    padding: 2em min(4%, 1.5em);
+    background-color: hsl(29, 46%, 93%);
+    width: min(80%, 80ch);
+    border-radius: 0.8em;
+}
+
+div#recomendationPopUp.hidden{
+    transform: translate(-50%, -50%) scale(0);
+}
+
+div#recomendationPopUp > h3{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+div#recomendationKeywordContainer{
+    margin-bottom: 1.2em;
+}
+
+div#recomendationKeywordContainer > div.keyword{
+    display: inline-block;
+    background-color: hsl(29, 46%, 80%);
+    height: 1.2em;
+    text-align: center;
+    padding: 0.3em 0.5em;
+    margin-top: 0.5em;
+    min-width: 4ch;
+    border-radius: 0.3em;
+}
+
+div#questionList > div{
+    background-color: hsl(29, 46%, 80%);
+    border-radius: 0.5em;
+    padding: 0.7em;
+    margin: 0.5em 0;
+    border: 1px solid hsl(29, 46%, 40%);
+}
+
+div#questionList > div.selected,
+div#questionList > div.selected:hover{
+    background-color: hsl(29, 46%, 70%);
+    outline: 1px solid hsl(29, 46%, 40%);
+}
+
+div#questionList > div:hover{
+    background-color: hsl(29, 46%, 60%);
+}
+
+div#actionButtons{
+    display: flex;
+    flex-direction: column;
+}
+
+div#actionButtons button{
+    display: block;
+    padding: 0.3em;
+}
+
+button#refreshButton{
+    background-color: hsl(29, 45%, 93%);
+    text-decoration: underline;
+    /* border: 1px solid hsl(29, 46%, 50%); */
+    border: none;
+    border-radius: 0.3em;
+    max-width: 20ch;
+    align-self: center;
+    margin: 0.2em 0 1.2em;
+}
+
+button#refreshButton:hover{
+    color: hsl(29, 46%, 30%);
+}
+
+div#actionButtons > div.centerButtons{
+    display: flex;
+    justify-content: space-between;
+    gap: min(2%, 1em);
+}
+
+div.centerButtons > button:hover{
+    background-color: hsl(29, 46%, 60%);
+}
+
+div.centerButtons > button{
+    background-color: hsl(29, 46%, 80%);
+    border: 1px solid hsl(29, 46%, 40%);
+    border-radius: 0.5em;
+    flex: 1;
 }

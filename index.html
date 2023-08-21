@@ -14,13 +14,13 @@
     </header>
     <main>
         <div class="chatbox user">
-            <h3 class="role">User</h3>
+            <!-- <h3 class="role">User</h3> -->
             <p>
                 Mengapa bumi berbentuk bulat?
             </p>
         </div>
         <div class="chatbox ai">
-            <h3 class="role">AI</h3>
+            <!-- <h3 class="role">AI</h3> -->
             <div class="content">
                 <p>Bumi memiliki bentuk bulat karena beberapa faktor utama:</p>
                 <ol>
@@ -54,6 +54,42 @@
             <button id="sendButton">
                 <div>➤</div>
             </button>
+        </div>
+    </div>
+    <div id="darkOverlay" class="hidden"></div>
+    <div id="recomendationPopUp" class="hidden">
+        <h3>Kata kunci</h3>
+        <div id="recomendationKeywordContainer">
+            <div class="keyword">Hai </div>
+            <div class="keyword">Bagaimana </div>
+            <div class="keyword">Testing</div>
+            <div class="keyword">Bisa gak yak</div>
+            <div class="keyword">Ujicoba kata kunci</div>
+        </div>
+        <h3>Rekomendasi Pertanyaan</h3>
+        <div id="questionList">
+            <div class="questionChoice">
+                Mengapa bumi berbentuk bulat
+            </div>
+            <div class="questionChoice">
+                Bagaimana terjadinya rotasi bumi
+            </div>
+            <div class="questionChoice selected">
+                Mengapa hari berjalan selama 24 jam
+            </div>
+            <div class="questionChoice">
+                Apa penyebab rotasi bumi tidak terasa oleh kita
+            </div>
+            <div class="questionChoice">
+                Bagaimana cara mengukur perputaran bumi
+            </div>
+        </div>
+        <div id="actionButtons">
+            <button id="refreshButton">Muat Ulang ⟳</button>
+            <div class="centerButtons">
+                <button id="cancelButton">Batal</button>
+                <button id="submitButton">Tanya</button>
+            </div>
         </div>
     </div>
 </body>
