@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrolin</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>OBROLIN</h1>
+        </div>
+    </header>
+    <main>
+        <div class="chatbox user">
+            <!-- <h3 class="role">User</h3> -->
+            <p>
+                Mengapa bumi berbentuk bulat?
+            </p>
+        </div>
+        <div class="chatbox ai">
+            <!-- <h3 class="role">AI</h3> -->
+            <div class="content">
+                <p>Bumi memiliki bentuk bulat karena beberapa faktor utama:</p>
+                <ol>
+                <li>
+                    <strong>Gravitasi:</strong> Gravitasi adalah gaya tarik yang dimiliki oleh semua benda dengan massa terhadap benda-benda lain. Gravitasi menarik segala sesuatu ke pusat Bumi, sehingga materi terdistribusi merata di seluruh permukaannya.
+                </li>
+                <li>
+                    <strong>Rotasi:</strong> Bumi berputar di sekitar sumbunya. Efek rotasi ini menciptakan percepatan sentrifugal yang membuat Bumi lebih lebar di khatulistiwa daripada di kutub, ikut berkontribusi terhadap bentuk bulat Bumi.
+                </li>
+                <li>
+                    <strong>Tekanan Gravitasi:</strong> Tekanan gravitasi menyebabkan material Bumi yang lebih rendah terkompresi oleh tekanan gravitasi lebih besar, sedangkan bagian atasnya terkompresi lebih sedikit. Hasilnya, permukaan Bumi membentuk bentuk bulat.
+                </li>
+                </ol>
+                <p>Kombinasi dari faktor-faktor ini menghasilkan bentuk bulat pada planet seperti Bumi. Konsep ini dikenal sebagai kesetimbangan hidrostatik, di mana tekanan dan gravitasi berinteraksi untuk membentuk bentuk benda langit yang relatif stabil.</p>
+            </div>
+        </div>
+    </main>
+    <div id="inputContainer">
+        <div id="keywordContainer">
+        </div>
+        <div id="textInputContainer">
+            <textarea name="textInput" id="textInput" oninput='this.style.height = "";this.style.height = this.scrollHeight - 16 + "px"'></textarea>
+            <button id="plusButton">
+                <div>+</div>
+            </button>
+            <button id="sendButton">
+                <div>➤</div>
+            </button>
+        </div>
+    </div>
+    <div id="darkOverlay" class="hidden"></div>
+    <div id="recommendationPopUp" class="hidden">
+        <h3>Kata kunci</h3>
+        <div id="recommendationKeywordContainer">
+        </div>
+        <h3>Rekomendasi Pertanyaan</h3>
+        <div id="recommendationQuestionContainer">
+        </div>
+        <div id="actionButtons">
+            <button id="refreshButton">Muat Ulang ⟳</button>
+            <div class="centerButtons">
+                <button id="cancelButton">Batal</button>
+                <button id="submitButton">Tanya</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
