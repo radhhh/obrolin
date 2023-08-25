@@ -40,11 +40,6 @@
     </main>
     <div id="inputContainer">
         <div id="keywordContainer">
-            <div class="keyword">Hai </div>
-            <div class="keyword">Bagaimana </div>
-            <div class="keyword">Testing</div>
-            <div class="keyword">Bisa gak yak</div>
-            <div class="keyword">Ujicoba kata kunci</div>
         </div>
         <div id="textInputContainer">
             <textarea name="textInput" id="textInput" oninput='this.style.height = "";this.style.height = this.scrollHeight - 16 + "px"'></textarea>
@@ -57,32 +52,12 @@
         </div>
     </div>
     <div id="darkOverlay" class="hidden"></div>
-    <div id="recomendationPopUp" class="hidden">
+    <div id="recommendationPopUp" class="hidden">
         <h3>Kata kunci</h3>
-        <div id="recomendationKeywordContainer">
-            <div class="keyword">Hai </div>
-            <div class="keyword">Bagaimana </div>
-            <div class="keyword">Testing</div>
-            <div class="keyword">Bisa gak yak</div>
-            <div class="keyword">Ujicoba kata kunci</div>
+        <div id="recommendationKeywordContainer">
         </div>
         <h3>Rekomendasi Pertanyaan</h3>
-        <div id="questionList">
-            <div class="questionChoice">
-                Mengapa bumi berbentuk bulat
-            </div>
-            <div class="questionChoice">
-                Bagaimana terjadinya rotasi bumi
-            </div>
-            <div class="questionChoice selected">
-                Mengapa hari berjalan selama 24 jam
-            </div>
-            <div class="questionChoice">
-                Apa penyebab rotasi bumi tidak terasa oleh kita
-            </div>
-            <div class="questionChoice">
-                Bagaimana cara mengukur perputaran bumi
-            </div>
+        <div id="recommendationQuestionContainer">
         </div>
         <div id="actionButtons">
             <button id="refreshButton">Muat Ulang ⟳</button>
@@ -92,5 +67,6 @@
             </div>
         </div>
     </div>
+    <script type="module" src="scripts/main.js" ></script>
 </body>
 </html>

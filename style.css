@@ -27,8 +27,8 @@ header{
     width: 100%;
     z-index: 100;
     background-color: hsl(29, 46%, 50%);
-    color: hsl(29, 46%, 90%);
-    border-bottom: hsl(29, 46%, 20%) solid 2px;
+    color: hsl(29, 46%, 93%);
+    border-bottom: hsl(29, 46%, 35%) solid 2px;
     height: 4em;
 }
 
@@ -79,7 +79,7 @@ div.chatbox > div.content > *{
 div#inputContainer{
     position: fixed;
     width: 100%;
-    padding: 1em;
+    padding: 0.6em 1em 1em;
     bottom: 0;
     background-color: hsl(29, 46%, 93%);
 }
@@ -99,12 +99,6 @@ div#keywordContainer > div.keyword{
 
 div#keywordContainer > div.keyword:hover{
     background-color: hsl(29, 46%, 60%);
-}
-
-div.keyword > button{
-    display: inline-block;
-
-    font-size: 0.8rem;
 }
 
 div#textInputContainer{
@@ -179,7 +173,7 @@ div#darkOverlay.hidden{
     opacity: 0%;
 }
 
-div#recomendationPopUp{
+div#recommendationPopUp{
     position: fixed;
     top: 50%;
     left: 50%;
@@ -191,31 +185,32 @@ div#recomendationPopUp{
     border-radius: 0.8em;
 }
 
-div#recomendationPopUp.hidden{
+div#recommendationPopUp.hidden{
     transform: translate(-50%, -50%) scale(0);
 }
 
-div#recomendationPopUp > h3{
+div#recommendationPopUp > h3{
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-div#recomendationKeywordContainer{
+div#recommendationKeywordContainer{
     margin-bottom: 1.2em;
 }
 
-div#recomendationKeywordContainer > div.keyword{
+div.keyword{
     display: inline-block;
     background-color: hsl(29, 46%, 80%);
     height: 1.2em;
     text-align: center;
     padding: 0.3em 0.5em;
     margin-top: 0.5em;
+    margin: 0.5em 0.2em 0;
     min-width: 4ch;
     border-radius: 0.3em;
 }
 
-div#questionList > div{
+div#recommendationQuestionContainer > div{
     background-color: hsl(29, 46%, 80%);
     border-radius: 0.5em;
     padding: 0.7em;
@@ -223,13 +218,13 @@ div#questionList > div{
     border: 1px solid hsl(29, 46%, 40%);
 }
 
-div#questionList > div.selected,
-div#questionList > div.selected:hover{
+div#recommendationQuestionContainer > div.selected,
+div#recommendationQuestionContainer > div.selected:hover{
     background-color: hsl(29, 46%, 70%);
     outline: 1px solid hsl(29, 46%, 40%);
 }
 
-div#questionList > div:hover{
+div#recommendationQuestionContainer > div:hover{
     background-color: hsl(29, 46%, 60%);
 }
 
