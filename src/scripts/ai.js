@@ -16,7 +16,7 @@ const response2 = [
     "Ini pertanyaan refreshed 5",
 ]
 
-export function ask(keywordList){
+export function generateQuestion(keywordList){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             currentQuestion = response1;

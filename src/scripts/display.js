@@ -8,12 +8,16 @@ function clearKeyword(){
     while(keywordContainer.firstChild) keywordContainer.removeChild(keywordContainer.firstChild);
 }
 
-export function appendKeyword(keyword){
-    // console.log(keyword);
-    const keywordContainer = document.getElementById('keywordContainer');
+export function generateKeywordElement(keyword){
     const newKeyword = document.createElement('div');
     newKeyword.classList.add('keyword');
     newKeyword.innerHTML = keyword;
+    return newKeyword;
+}
+
+export function appendKeyword(newKeyword){
+    // console.log(keyword);
+    const keywordContainer = document.getElementById('keywordContainer');
     keywordContainer.appendChild(newKeyword);
 }
 
@@ -32,14 +36,33 @@ export function showPopUpRecommendation(keywordList){
     });
 }
 
-export function showRecommendation(recommendationList){
+export function showRecommendation(elementList){
     const questionContainer = document.getElementById('recommendationQuestionContainer');
-    recommendationList.forEach((question) => {
+    elementList.forEach((element) => {
+        questionContainer.appendChild(element);
+    });
+}
+
+export function generateRecommendationElements(recommendationList){
+    let elementList = [];
+    recommendationList.forEach((question, index) => {
         const newQuestion = document.createElement('div');
         newQuestion.classList.add('questionChoice');
+        newQuestion.id = `r-${index}`;
         newQuestion.innerHTML = question;
-        questionContainer.appendChild(newQuestion);
+        elementList.push(newQuestion);
     });
+    return elementList;
+}
+
+export function selectRecommendation(index){
+    const target = document.getElementById(`r-${index}`);
+    target.classList.add('selected');
+}
+
+export function unselectRecommendation(index){
+    const target = document.getElementById(`r-${index}`);
+    target.classList.remove('selected');
 }
 
 
