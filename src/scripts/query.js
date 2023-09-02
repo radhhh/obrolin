@@ -1,13 +1,13 @@
-let keywordList = [];
+// let keywordList = [];
 
-export function addKeyList(keyword){
-    keywordList.push(keyword);
-}
+// export function addKeyList(keyword){
+//     keywordList.push(keyword);
+// }
 
-export function getKeyList(keyword){
-    return keywordList;
-}
+// export function getKeyList(keyword){
+//     return keywordList;
+// }
 
-export function clear(){
-    keywordList = [];
-}
+// export function clear(){
+//     keywordList = [];
+// }
