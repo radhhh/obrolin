@@ -8,13 +8,6 @@ function clearKeyword(){
     while(keywordContainer.firstChild) keywordContainer.removeChild(keywordContainer.firstChild);
 }
 
-export function generateKeywordElement(keyword){
-    const newKeyword = document.createElement('div');
-    newKeyword.classList.add('keyword');
-    newKeyword.innerHTML = keyword;
-    return newKeyword;
-}
-
 export function appendKeyword(newKeyword){
     // console.log(keyword);
     const keywordContainer = document.getElementById('keywordContainer');
@@ -47,7 +40,7 @@ export function generateRecommendationElements(recommendationList){
     let elementList = [];
     recommendationList.forEach((question, index) => {
         const newQuestion = document.createElement('div');
-        newQuestion.classList.add('questionChoice');
+        newQuestion.classList.add('recommendation');
         newQuestion.id = `r-${index}`;
         newQuestion.innerHTML = question;
         elementList.push(newQuestion);

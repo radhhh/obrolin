@@ -1,4 +1,6 @@
 * {
+    font-family: 'Lato';
+    font-weight: 700;
     font-size: 1em;
     margin: 0px;
     padding: 0px;
@@ -16,8 +18,7 @@ body, html{
 }
 
 body{
-    background-color: hsl(29, 46%, 93%);
-    padding-top: 4em;
+    padding-top: 5em;
     padding-bottom: 7em;
 }
 
@@ -26,246 +27,416 @@ header{
     top: 0;
     width: 100%;
     z-index: 100;
-    background-color: hsl(29, 46%, 50%);
-    color: hsl(29, 46%, 93%);
-    border-bottom: hsl(29, 46%, 35%) solid 2px;
-    height: 4em;
+    padding: 1em 2em;
+    box-sizing: border-box;
+    background-color: white;
 }
 
 header > div.container{
+    display: flex;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
+    box-sizing: border-box;
+    justify-content: space-between;
     align-items: center;
 }
 
 header h1{
+    font-weight: 900;
     font-size: 2rem;
+    cursor: default;
+}
+
+header button{
+    top: 0.4em;
+    display: block;
+    box-sizing: border-box;
+    border: none;
+    background-color: white;
+}
+
+button svg path#Info-Square-2{
+    fill: black;
+}
+
+button:hover svg path#Info-Square-2{
+    fill: #2D68DC;
 }
 
 main{
-    padding-top: 0.5em;
-    scroll-margin-bottom: 400px;
+    padding: 0 2em;
+}
+
+strong{
+    font-weight: 900;
+}
+
+div.chatsection{
+    margin-bottom: 1em;
+    display: flex;
+}
+
+div.chatsection.user{
+    justify-content: flex-end;
+    padding-left: 3em;
+}
+
+div.chatsection.ai{
+    justify-content: flex-start;
+    padding-right: 3em;
+}
+div.chatsection h3{
+    color: #8E8D94;
+    font-size: 0.8rem;
+    font-weight: 900;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.827px; 
+    margin-left: 2em;
+    margin-bottom: 0.3em;
 }
 
 div.chatbox{
-    margin: 0.5em 1em;
-    padding: 1em 1em;
-    border: black solid 1px;
-    border-radius: 1em;
-}
-
-div.chatbox.user{
-    background-color: hsl(29, 46%, 88%);
-}
-
-div.chatbox.ai{
-    background-color: hsl(29, 45%, 88%);
-}
-
-div.chatbox *{
-    line-height: 1.5em;
-}
-
-ol{
-    padding-left: 2ch;
-}
-
-div.chatbox > div.content > *{
-    margin: 0.25em 0;
-}
-
-div#inputContainer{
-    position: fixed;
-    width: 100%;
-    padding: 0.6em 1em 1em;
-    bottom: 0;
-    background-color: hsl(29, 46%, 93%);
-}
-
-div#keywordContainer{
-    margin-bottom: 0.5em;
-}
-
-div#keywordContainer > div.keyword{
-    display: inline-block;
-    background-color: hsl(29, 46%, 80%);
-    text-align: center;
-    padding: 0.3em 0.5em;
-    min-width: 4ch;
-    border-radius: 0.3em;
-}
-
-div#keywordContainer > div.keyword:hover{
-    background-color: hsl(29, 46%, 60%);
-}
-
-div#textInputContainer{
+    color: white;
+    font-size: 1rem;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.6em;
-    width: calc(100vw - 2em);
+    width: fit-content;
+    max-width: 75ch;
 }
 
-div#textInputContainer textarea{
-    padding: 0.5em;
-    font-family: sans-serif;
-    font-size: inherit;
-    height: 1.5em;
+div.chatbox > div.content{
+    padding: 1em 0 1em;
+    min-width: 15ch;
+    line-height: 1.5;
     flex: 1;
-    resize: none;
-    border-radius: 0.5em;
-    border: solid 1px hsl(29, 46%, 10%);
-    background-color: hsl(29, 46%, 93%);
 }
 
-div#textInputContainer textarea:focus{
-    /* outline: hsl(29, 46%, 10%) solid 1px; */
-    outline: none;
-    /* border: solid 1px red; */
-    box-shadow: none;
+div.chatbox > div.content *:not(:first-child){
+    margin-top: 0.5em;
 }
 
-div#textInputContainer button{
-    background-color: hsl(29, 46%, 50%);
-    color: hsl(29, 46%, 93%);
+div.chatbox > div.content ol, 
+div.chatbox > div.content ul{
+    margin-left: 1em;
+}
+
+div.chatbox > div.left-box{
+    display: flex;
+    flex-direction: column;
+    width: 1.5em;
+    align-items: flex-end;
+}
+
+div.chatbox > div.right-box{
+    display: flex;
+    flex-direction: column;
+    width: 1.5em;
+    align-items: flex-start;
+}
+
+div.middle-left, div.middle-right{
+    width: 1em;
+    flex: 1;
+}
+
+div.upper-left, 
+div.lower-left, 
+div.upper-right, 
+div.lower-right{
+    height: 1em;
+    width: 1em;
+}
+
+div.upper-left{
+    border-radius: 1em 0px 0px 0px; 
+}
+div.upper-right{
+    border-radius: 0px 1em 0px 0px;
+}
+div.lower-right{
+    border-radius: 0px 0em 1em 0px;
+}
+div.lower-left{
+    border-radius: 0px 0em 0px 1em;
+}
+
+div.chatbox.user > div.left-box > div,
+div.chatbox.user > div.right-box > div{
+    background-color: #26252A;
+}
+
+div.chatbox.user > div.content{
+    background-color: #26252A;
+}
+
+div.chatbox.ai > div.left-box > div,
+div.chatbox.ai > div.right-box > div{
+    background-color: #2D68DC;
+}
+
+div.chatbox.ai > div.content{
+    background-color: #2D68DC;
+}
+
+div.chatbox svg{
+    position: absolute;
+    bottom: 0;
+    width: 1.5em;
+}
+
+div.chatbox.ai svg{
+    left: -1px;
+}
+
+div.chatbox.user svg{
+    right: -1px;
+}
+
+
+/* Input Section */
+
+section#inputContainer{
+    display: flex;
+    position: fixed;
+    align-items: flex-end;
+    gap: 0.6em;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1em 2em 2em;
+}
+
+section#inputContainer button:hover{
+    background-color: hsl(220, 71%, 40%);
+}
+
+button#voiceInputButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5em;
+    height: 5em;
+    flex-shrink: 0;
+    border-radius: 10px 48.5px 10px 10px;
+    border: 1px solid #2D68DC;
+    background-color: #2D68DC;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+button#voiceInputButton > svg{
     display: block;
-    width: 2.5rem;
-    height: 2.5rem;
-    align-self: flex-end;
+    position: relative;
+    top: 0.1em;
+    right: 0.1em;
+    width: 2.2em;
+    height: auto;
+    padding: 5.417px 10.833px;
+}
+
+div#middleInputContainer{
+    flex: 1;
+}
+
+div#middleInputContainer > textarea{
+    letter-spacing: 0.5px;
+    color: white;
+    height: 2.5em;
+    font-size: 1rem;
+    padding: 0.6em 0.5em 0.4em;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #2D68DC;
+    background: #2D68DC;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    resize: none;
+}
+
+div#middleInputContainer textarea:hover{
+    background-color: hsl(220, 71%, 48%);
+}
+
+div#middleInputContainer textarea:focus{
+    outline: none;
+    background: #2D68DC;
+}
+
+div#middleInputContainer > div#keywordContainer{
+    width: 100%;
+    margin-bottom: 0.3em;
+}
+
+.keyword{
+    color: white;
+    font-size: 0.8rem;
+    display: inline-block;
+    padding: 0.3em 0.7em;
+    width: max(5ch, fit-content);
+    margin: 0 0 0.15em 0.3em;
+    background: #2D68DC;
+    border-radius: 0.7em;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    border: none;
+    cursor: pointer;
+}
+
+div#keywordContainer .keyword:hover{
+    background-color: hsl(220, 71%, 40%);
+}
+
+div#keywordContainer .keyword .keyword-close{
+    display: none;
+}
+
+div#keywordContainer .keyword.select-mode{
+    background-color: hsl(220, 71%, 30%);
+    color: hsl(220, 71%, 48%);
+}
+
+div#keywordContainer .keyword.select-mode:hover{
+    background-color: hsl(220, 71%, 20%);
+}
+
+div#keywordContainer .keyword.select-mode .keyword-close{
+    text-align: center;
+    color: white;
+    font-weight: 900;
+    opacity: 1;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+div#keywordContainer .keyword .keyword-close svg{
+    top: 0.1em;
+    height: 1em;
+    width: 1em;
+}
+
+div#rightButtonContainer{
+    display: flex;
+    width: 5.4em;
+    gap: 0.4em;
+}
+
+div#rightButtonContainer > button{
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    border: solid 1px black;
+    border: none;
+    height: 2.5em;
+    width: 2.5em;
+    background-color: #2D68DC;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 }
 
-div#textInputContainer button:hover{
-    background-color: hsl(29, 46%, 40%);
+div#rightButtonContainer svg {
+    width: 1.2em;
 }
 
-button#plusButton > div{
-    font-size: 2em;
-    bottom: 0.08em;
-}
+/* Pop Up Section */
 
-button#sendButton > div{
-    font-size: 1.2em;
-    bottom: 0.02em;
-    left: 0.01em;
+.hidden{
+    transform: translate(-50%, -50%) scale(0) !important;
 }
 
 div#darkOverlay{
-    position: fixed;
-    z-index: 150;
-    top: 0;
-    left: 0;
+    z-index: 200;
     width: 100%;
     height: 100%;
-    background-color: black;
-    opacity: 40%;
+    background-color: hsla(220, 69%, 5%, 0.5);
 }
 
-div#darkOverlay.hidden{
-    display: none;
-    opacity: 0%;
+.center-popup{
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
 }
 
 div#recommendationPopUp{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 200;
-    transform: translate(-50%, -50%) scale(1);
-    padding: 2em min(4%, 1.5em);
-    background-color: hsl(29, 46%, 93%);
-    width: min(80%, 80ch);
-    border-radius: 0.8em;
-}
-
-div#recommendationPopUp.hidden{
-    transform: translate(-50%, -50%) scale(0);
+    font-size: 1.2rem;
+    width: min(80vw, 60ch);
+    border-radius: 0.5em;
+    z-index: 300;
+    padding: 1.2em 1em 1em;
+    background-color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.149) inset;
 }
 
 div#recommendationPopUp > h3{
-    font-size: 1.2rem;
-    font-weight: bold;
+    margin-bottom: 0.2em;
 }
 
-div#recommendationKeywordContainer{
-    margin-bottom: 1.2em;
+div#recommendationPopUp > div{
+    margin-bottom: 0.5em;
 }
 
-div.keyword{
-    display: inline-block;
-    background-color: hsl(29, 46%, 80%);
-    height: 1.2em;
-    text-align: center;
-    padding: 0.3em 0.5em;
-    margin-top: 0.5em;
-    margin: 0.5em 0.2em 0;
-    min-width: 4ch;
-    border-radius: 0.3em;
-}
-
-div#recommendationQuestionContainer > div{
-    background-color: hsl(29, 46%, 80%);
+div.recommendation{
+    cursor: pointer;
+    font-size: 1rem;
+    color: white;
+    background-color: #2D68DC;
+    padding: 0.5em 0.7em;
     border-radius: 0.5em;
-    padding: 0.7em;
-    margin: 0.5em 0;
-    border: 1px solid hsl(29, 46%, 40%);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 }
 
-div#recommendationQuestionContainer > div.selected,
-div#recommendationQuestionContainer > div.selected:hover{
-    background-color: hsl(29, 46%, 70%);
-    outline: 1px solid hsl(29, 46%, 40%);
+div.recommendation:not(:last-child){
+    margin-bottom: 0.5em;
 }
 
-div#recommendationQuestionContainer > div:hover{
-    background-color: hsl(29, 46%, 60%);
+div.recommendation:hover{
+    background-color: hsl(220, 71%, 40%);
+}
+
+div.recommendation.selected{
+    background-color: hsl(220, 71%, 30%);
+    outline: hsl(220, 71%, 20%) 2px solid;
 }
 
 div#actionButtons{
+    margin-top: 0.8em;
     display: flex;
     flex-direction: column;
-}
-
-div#actionButtons button{
-    display: block;
-    padding: 0.3em;
+    gap: 1em;
+    align-items: center;
 }
 
 button#refreshButton{
-    background-color: hsl(29, 45%, 93%);
-    text-decoration: underline;
-    /* border: 1px solid hsl(29, 46%, 50%); */
+    font-size: 1rem;
+    background-color: white;
+    box-shadow: none;
     border: none;
-    border-radius: 0.3em;
-    max-width: 20ch;
-    align-self: center;
-    margin: 0.2em 0 1.2em;
+    text-decoration: underline;
 }
 
 button#refreshButton:hover{
-    color: hsl(29, 46%, 30%);
+    color: hsl(220, 71%, 40%);
 }
 
-div#actionButtons > div.centerButtons{
+div#centerButtons button:hover{
+    background-color: hsl(220, 71%, 40%);
+}
+
+div#centerButtons{
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    gap: min(2%, 1em);
+    justify-content: space-evenly;
 }
 
-div.centerButtons > button:hover{
-    background-color: hsl(29, 46%, 60%);
-}
-
-div.centerButtons > button{
-    background-color: hsl(29, 46%, 80%);
-    border: 1px solid hsl(29, 46%, 40%);
-    border-radius: 0.5em;
-    flex: 1;
+div#centerButtons > button{
+    font-size: 1rem;
+    color: white;
+    width: 12ch;
+    height: 1.8em;
+    background-color: #2D68DC;
+    border-radius: 0.2em;
+    border: none;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }

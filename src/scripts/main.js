@@ -31,7 +31,7 @@ function addKeyword(){
         return;
     }
     query.addKeyList(textInput.value);
-    let keywordElement = display.generateKeywordElement(textInput.value);
+    let keywordElement = query.generateSingleElement(textInput.value);
     keywordElement = addKeywordListener(keywordElement);
     display.appendKeyword(keywordElement);
     textInput.value = '';
@@ -60,9 +60,8 @@ function clearPopUp(){
 
 async function refreshQuestion(){
     selectedRecommendation = undefined;
-    console.log("refreshing question");
     display.clearRecommendation();
-    recommendationElements = display.generateRecommendationElements(await gpt.refreshQuestion());
+    let recommendationElements = display.generateRecommendationElements(await gpt.refreshQuestion());
     recommendationElements = addRecListener(recommendationElements);
     display.showRecommendation(recommendationElements);
 }
