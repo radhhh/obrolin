@@ -261,7 +261,7 @@ div#middleInputContainer textarea:focus{
     background: #2D68DC;
 }
 
-div#middleInputContainer > div#keywordsContainer{
+div#middleInputContainer > div#keywordContainer{
     width: 100%;
     margin-bottom: 0.3em;
 }
@@ -272,28 +272,32 @@ div#middleInputContainer > div#keywordsContainer{
     display: inline-block;
     padding: 0.3em 0.7em;
     width: max(5ch, fit-content);
-    margin-left: 0.2em;
-    margin-bottom: 0.15em;
+    margin: 0 0 0.15em 0.3em;
     background: #2D68DC;
     border-radius: 0.7em;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
     border: none;
+    cursor: pointer;
 }
 
-div#keywordsContainer .keyword .keyword-close{
+div#keywordContainer .keyword:hover{
+    background-color: hsl(220, 71%, 40%);
+}
+
+div#keywordContainer .keyword .keyword-close{
     display: none;
 }
 
-div#keywordsContainer .keyword.select-mode{
+div#keywordContainer .keyword.select-mode{
     background-color: hsl(220, 71%, 30%);
     color: hsl(220, 71%, 48%);
 }
 
-div#keywordsContainer .keyword.select-mode:hover{
+div#keywordContainer .keyword.select-mode:hover{
     background-color: hsl(220, 71%, 20%);
 }
 
-div#keywordsContainer .keyword.select-mode .keyword-close{
+div#keywordContainer .keyword.select-mode .keyword-close{
     text-align: center;
     color: white;
     font-weight: 900;
@@ -306,7 +310,7 @@ div#keywordsContainer .keyword.select-mode .keyword-close{
 }
 
 
-div#keywordsContainer .keyword .keyword-close svg{
+div#keywordContainer .keyword .keyword-close svg{
     top: 0.1em;
     height: 1em;
     width: 1em;
