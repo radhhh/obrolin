@@ -42,17 +42,18 @@ export async function demo(){
 }
 
 export async function generateRecommendation(keywordList){
-    for(let i = 0; i < 5; i++){
+    for(let i = 0; i < 3; i++){
         try{
             const response = await getMessage([
                 {role: "system", content: "Chat ini dalam bahasa Indonesia. User akan memberikan\
                 kata kunci yang dipisahkan oleh koma, kamu harus memberikan list 5 pertanyaan\
                 yang relevan dengan kata kunci tersebut tanpa kata pengantar"},
                 {role: "user", content: keywordList.join(', ')},
-            ])
+            ]);
             const finalResponse = response.split(/\n/)
                                         .filter((line) => /^\d$/.test(line[0]))
                                         .map((line) => line.slice(3));
+            if(finalResponse.length != 5) throw new Error("Parsing Problem");
             return finalResponse;
         }
         catch{
@@ -63,11 +64,9 @@ export async function generateRecommendation(keywordList){
 }
 
 export async function refreshRecommendation(){
-    if(currentQuestion === undefined) return undefined;
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            currentQuestion = response2;
-            resolve(currentQuestion);
+            resolve(response2);
         }, 1000)
     })
 }

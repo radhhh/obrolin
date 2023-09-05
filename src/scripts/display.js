@@ -21,15 +21,15 @@ export function showPopUpRecommendation(keywordElementList){
     });
 }
 
-export function showWaiting(){
-    
-}
-
-export function hideWaiting(){
-
+function toggleRecommendationLoaded(param){
+    const recommendationPopUp = document.getElementById('recommendationPopUp');
+    if(param == "add") recommendationPopUp.classList.add('loaded');
+    else if(param == "remove") recommendationPopUp.classList.remove('loaded');
+    else recommendationPopUp.classList.toggle('loaded');
 }
 
 export function appendRecommendation(elementList){
+    toggleRecommendationLoaded('add');
     const questionContainer = document.getElementById('recommendationQuestionContainer');
     elementList.forEach((element) => {
         questionContainer.appendChild(element);
@@ -37,6 +37,7 @@ export function appendRecommendation(elementList){
 }
 
 export function clearRecommendation(){
+    toggleRecommendationLoaded('remove');
     const questionContainer = document.getElementById('recommendationQuestionContainer');
     while(questionContainer.firstChild) questionContainer.removeChild(questionContainer.firstChild);
 }
@@ -46,7 +47,7 @@ export function generateRecommendationElements(recommendationList){
     recommendationList.forEach((question, index) => {
         const newQuestion = document.createElement('div');
         newQuestion.classList.add('recommendation');
-        newQuestion.id = `r-${index}`;
+        newQuestion.id = `recommendation-${index}`;
         newQuestion.innerHTML = question;
         elementList.push(newQuestion);
     });
@@ -54,12 +55,12 @@ export function generateRecommendationElements(recommendationList){
 }
 
 export function selectRecommendation(index){
-    const target = document.getElementById(`r-${index}`);
+    const target = document.getElementById(`recommendation-${index}`);
     target.classList.add('selected');
 }
 
 export function unselectRecommendation(index){
-    const target = document.getElementById(`r-${index}`);
+    const target = document.getElementById(`recommendation-${index}`);
     target.classList.remove('selected');
 }
 

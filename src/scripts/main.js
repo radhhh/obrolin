@@ -28,9 +28,6 @@ function addKeywordListener(element){
         }
         else{
             target.classList.add('select-mode');
-            // setTimeout(() => {
-            //     target.classList.remove('select-mode');
-            // }, 1000)
         }
     });
     element.addEventListener('mouseleave', (e) => {
@@ -53,26 +50,26 @@ function addKeyword(){
 
 async function sendKeyword(){
     addKeyword();
-    display.toggleOverlay();
+    console.log(query.getKeyList());
+    if(query.getKeyList().length == 0) return;
     const queryElementList = query.generateElementList();
+    display.toggleOverlay();
     display.showPopUpRecommendation(queryElementList);
-    display.showWaiting();
-    let recommendationElements = display.generateRecommendationElements(await gpt.generateRecommendation(query.getKeyList()));
-    display.hideWaiting();
-    recommendationElements = addRecListener(recommendationElements);
-    display.appendRecommendation(recommendationElements);
+    refreshRecommendation();
 }
 
 function clearPopUp(){
     selectedRecommendation = undefined;
     display.toggleOverlay();
     display.hidePopUpRecommendation();
+
 }
 
 async function refreshRecommendation(){
     selectedRecommendation = undefined;
     display.clearRecommendation();
-    let recommendationElements = display.generateRecommendationElements(await gpt.refreshRecommendation());
+    const recommendationList = await gpt.generateRecommendation(query.getKeyList());
+    let recommendationElements = display.generateRecommendationElements(recommendationList);
     recommendationElements = addRecListener(recommendationElements);
     display.appendRecommendation(recommendationElements);
 }

@@ -411,6 +411,7 @@ div#actionButtons{
 }
 
 button#refreshButton{
+    display: none;
     font-size: 1rem;
     background-color: white;
     box-shadow: none;
@@ -420,6 +421,10 @@ button#refreshButton{
 
 button#refreshButton:hover{
     color: hsl(220, 71%, 40%);
+}
+
+.loaded button#refreshButton{
+    display: block;
 }
 
 div#centerButtons button:hover{
@@ -442,4 +447,64 @@ div#centerButtons > button{
     border: none;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+
+/* Animation Part */
+
+#recommendationPopUp .dot-flashing{
+    margin: auto;
+}
+
+.dot-flashing {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #2D68DC;
+    color: #2D68DC;
+    animation: dot-flashing 1s infinite linear alternate;
+    animation-delay: 0.5s;
+}
+
+.loaded .dot-flashing{
+    display: none;
+}
+
+.dot-flashing::before, .dot-flashing::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+}
+
+.dot-flashing::before {
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #2D68DC;
+    color: #2D68DC;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 0s;
+}
+
+.dot-flashing::after {
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #2D68DC;
+    color: #2D68DC;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 1s;
+}
+  
+@keyframes dot-flashing {
+    0% {
+      background-color: #2D68DC;
+    }
+    50%, 100% {
+      background-color: rgba(152, 128, 255, 0.2);
+    }
 }
