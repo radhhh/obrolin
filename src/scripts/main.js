@@ -56,13 +56,9 @@ async function sendKeyword(){
     display.toggleOverlay();
     const queryElementList = query.generateElementList();
     display.showPopUpRecommendation(queryElementList);
-    let recommendationElements;
-    if(gpt.getQuestion() === undefined) {
-        recommendationElements = display.generateRecommendationElements(await gpt.generateQuestion(query.getKeyList()));
-    }
-    else{
-        recommendationElements = display.generateRecommendationElements(gpt.getQuestion());
-    }
+    display.showWaiting();
+    let recommendationElements = display.generateRecommendationElements(await gpt.generateRecommendation(query.getKeyList()));
+    display.hideWaiting();
     recommendationElements = addRecListener(recommendationElements);
     display.appendRecommendation(recommendationElements);
 }
@@ -73,10 +69,10 @@ function clearPopUp(){
     display.hidePopUpRecommendation();
 }
 
-async function refreshQuestion(){
+async function refreshRecommendation(){
     selectedRecommendation = undefined;
     display.clearRecommendation();
-    let recommendationElements = display.generateRecommendationElements(await gpt.refreshQuestion());
+    let recommendationElements = display.generateRecommendationElements(await gpt.refreshRecommendation());
     recommendationElements = addRecListener(recommendationElements);
     display.appendRecommendation(recommendationElements);
 }
@@ -87,7 +83,7 @@ document.getElementById('sendButton').addEventListener('click', sendKeyword);
 
 document.getElementById('cancelButton').addEventListener('click', clearPopUp);
 
-document.getElementById('refreshButton').addEventListener('click', refreshQuestion);
+document.getElementById('refreshButton').addEventListener('click', refreshRecommendation);
 
 document.getElementById('textInput').addEventListener('keydown', (e) => {
     if(e.key === 'Enter'){

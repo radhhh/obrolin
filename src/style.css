@@ -180,7 +180,7 @@ div.chatbox.ai > div.content{
 
 div.chatbox svg{
     position: absolute;
-    bottom: 0;
+    bottom: 1px;
     width: 1.5em;
 }
 
@@ -272,7 +272,7 @@ div#middleInputContainer > div#keywordContainer{
     display: inline-block;
     padding: 0.3em 0.7em;
     width: max(5ch, fit-content);
-    margin: 0 0 0.15em 0.3em;
+    margin: 0 0.3em 0.15em 0;
     background: #2D68DC;
     border-radius: 0.7em;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;

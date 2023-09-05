@@ -21,6 +21,14 @@ export function showPopUpRecommendation(keywordElementList){
     });
 }
 
+export function showWaiting(){
+    
+}
+
+export function hideWaiting(){
+
+}
+
 export function appendRecommendation(elementList){
     const questionContainer = document.getElementById('recommendationQuestionContainer');
     elementList.forEach((element) => {
