@@ -1,39 +1,36 @@
-export function clearRecommendation(){
-    const questionContainer = document.getElementById('recommendationQuestionContainer');
-    while(questionContainer.firstChild) questionContainer.removeChild(questionContainer.firstChild);
-}
-
-function clearKeyword(){
-    const keywordContainer = document.getElementById('recommendationKeywordContainer');
-    while(keywordContainer.firstChild) keywordContainer.removeChild(keywordContainer.firstChild);
-}
-
 export function appendKeyword(newKeyword){
     // console.log(keyword);
     const keywordContainer = document.getElementById('keywordContainer');
     keywordContainer.appendChild(newKeyword);
 }
 
+export function clearKeyword(){
+    const keywordContainer = document.getElementById('recommendationKeywordContainer');
+    while(keywordContainer.firstChild) keywordContainer.removeChild(keywordContainer.firstChild);
+}
+
 export function toggleOverlay(){
     document.getElementById('darkOverlay').classList.toggle('hidden');
 }
 
-export function showPopUpRecommendation(keywordList){
+export function showPopUpRecommendation(keywordElementList){
     document.getElementById('recommendationPopUp').classList.remove('hidden');
     const keywordContainer = document.getElementById('recommendationKeywordContainer');
-    keywordList.forEach((keyword) => {
-        const newKeyword = document.createElement('div');
-        newKeyword.classList.add('keyword');
-        newKeyword.innerHTML = keyword;
-        keywordContainer.appendChild(newKeyword);
+    keywordElementList.forEach((element) => {
+        keywordContainer.appendChild(element);
     });
 }
 
-export function showRecommendation(elementList){
+export function appendRecommendation(elementList){
     const questionContainer = document.getElementById('recommendationQuestionContainer');
     elementList.forEach((element) => {
         questionContainer.appendChild(element);
     });
+}
+
+export function clearRecommendation(){
+    const questionContainer = document.getElementById('recommendationQuestionContainer');
+    while(questionContainer.firstChild) questionContainer.removeChild(questionContainer.firstChild);
 }
 
 export function generateRecommendationElements(recommendationList){

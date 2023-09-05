@@ -19,9 +19,23 @@ function addRecListener(elementList){
 }
 
 function addKeywordListener(element){
-    element.addEventListener('mouseenter', () => {
-        // todo listener for keyword elements
-    })
+    element.addEventListener('click', (e) => {
+        const target = e.currentTarget;
+        if(target.classList.contains('select-mode')){
+            const targetID = e.currentTarget.id.replace('keyword-', '');
+            query.removeKeyword(targetID);
+            target.remove();
+        }
+        else{
+            target.classList.add('select-mode');
+            // setTimeout(() => {
+            //     target.classList.remove('select-mode');
+            // }, 1000)
+        }
+    });
+    element.addEventListener('mouseleave', (e) => {
+        e.currentTarget.classList.remove('select-mode');
+    });
     return element;
 }
 
@@ -30,8 +44,8 @@ function addKeyword(){
     if(textInput.value === ''){
         return;
     }
-    query.addKeyList(textInput.value);
-    let keywordElement = query.generateSingleElement(textInput.value);
+    const elementID = query.addKeyword(textInput.value);
+    let keywordElement = query.generateSingleHTML(textInput.value, true, elementID);
     keywordElement = addKeywordListener(keywordElement);
     display.appendKeyword(keywordElement);
     textInput.value = '';
@@ -40,7 +54,8 @@ function addKeyword(){
 async function sendKeyword(){
     addKeyword();
     display.toggleOverlay();
-    display.showPopUpRecommendation(query.getKeyList());
+    const queryElementList = query.generateElementList();
+    display.showPopUpRecommendation(queryElementList);
     let recommendationElements;
     if(gpt.getQuestion() === undefined) {
         recommendationElements = display.generateRecommendationElements(await gpt.generateQuestion(query.getKeyList()));
@@ -49,7 +64,7 @@ async function sendKeyword(){
         recommendationElements = display.generateRecommendationElements(gpt.getQuestion());
     }
     recommendationElements = addRecListener(recommendationElements);
-    display.showRecommendation(recommendationElements);
+    display.appendRecommendation(recommendationElements);
 }
 
 function clearPopUp(){
@@ -63,7 +78,7 @@ async function refreshQuestion(){
     display.clearRecommendation();
     let recommendationElements = display.generateRecommendationElements(await gpt.refreshQuestion());
     recommendationElements = addRecListener(recommendationElements);
-    display.showRecommendation(recommendationElements);
+    display.appendRecommendation(recommendationElements);
 }
 
 document.getElementById('plusButton').addEventListener('click', addKeyword);
