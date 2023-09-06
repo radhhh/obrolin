@@ -82,13 +82,13 @@ export function addUserChat(message, chatIndex){
     chatElement.classList.add("chatsection", "user");
     chatElement.innerHTML = `<div>
                                 <h3>Anda</h3>
-                                <div class="chatbox user">
+                                <div class="chatbox user" id="chat-${chatIndex}">
                                     <div class="left-box">
                                         <div class="upper-left"></div>
                                         <div class="middle-left"></div>
                                         <div class="lower-left"></div>
                                     </div>
-                                    <div class="content" id="chat-${chatIndex}">
+                                    <div class="content">
                                         ${message}
                                     </div>
                                     <div class="right-box">
@@ -102,7 +102,7 @@ export function addUserChat(message, chatIndex){
                                 </div>
                             </div>`;
     main.appendChild(chatElement);
-    chatElement.scrollIntoView();
+    scrollIntoTop(chatElement);
 }
 
 export function addGPTChat(message, chatIndex){
@@ -111,7 +111,7 @@ export function addGPTChat(message, chatIndex){
     chatElement.classList.add("chatsection", "ai");
     chatElement.innerHTML = `<div>
                                 <h3>Obrolin AI</h3>
-                                <div class="chatbox ai">
+                                <div class="chatbox ai" id="chat-${chatIndex}">
                                     <div class="left-box">
                                         <div class="upper-left"></div>
                                         <div class="middle-left"></div>
@@ -120,7 +120,7 @@ export function addGPTChat(message, chatIndex){
                                             <path d="M 206.587 196.249 C 156.881 196.249 116.587 236.543 116.587 286.249 C 116.587 289.324 116.741 292.363 117.042 295.358 L 176.312 295.358 C 173.204 286.67 171.511 277.31 171.511 267.554 C 171.511 237.258 187.835 210.774 212.168 196.419 C 210.322 196.306 208.461 196.249 206.587 196.249 Z" style="fill: rgb(45, 104, 220); transform-origin: 164.377px 245.802px;" transform="matrix(-1, 0, 0, -1, -0.000004631608, -0.0000069259)"/>
                                         </svg>
                                     </div>
-                                    <div class="content" id="chat-${chatIndex}">
+                                    <div class="content">
                                         ${message}
                                     </div>
                                     <div class="right-box">
@@ -131,11 +131,20 @@ export function addGPTChat(message, chatIndex){
                                 </div>
                             </div>`;
     main.appendChild(chatElement);
-    chatElement.scrollIntoView();
+    scrollIntoTop(chatElement);
 }
 
 export function updateChatContent(message, chatIndex){
-    const targetContent = document.getElementById(`chat-${chatIndex}`);
+    console.log(`#chat-${chatIndex} div.content`);
+    const targetContent = document.querySelector(`#chat-${chatIndex} div.content`);
     targetContent.innerHTML = `${message}`;
     targetContent.scrollIntoView();
+    scrollIntoTop(document.getElementById(`chat-${chatIndex}`));
+}
+
+function scrollIntoTop(targetElement){
+    targetElement.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    })
 }

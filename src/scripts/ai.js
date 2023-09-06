@@ -1,4 +1,4 @@
-const APIKEY = "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";
+const APIKEY = "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";
 
 const response1 = [
     "Ini pertanyaan 1",
