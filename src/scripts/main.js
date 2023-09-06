@@ -3,7 +3,11 @@ import * as display from './display.js';
 import * as gpt from './ai.js';
 import "../style.css";
 
+let recommendationList = undefined;
 let selectedRecommendation = undefined;
+let chatIndex = 0;
+const controller = new AbortController();
+let signal = controller.signal;
 
 function addRecListener(elementList){
     elementList.forEach((element) => {
@@ -11,7 +15,7 @@ function addRecListener(elementList){
             if(selectedRecommendation !== undefined){
                 display.unselectRecommendation(selectedRecommendation);
             }
-            selectedRecommendation = parseInt(element.id.split("-")[1]);
+            selectedRecommendation = parseInt(element.id.replace('recommendation-', ''));
             display.selectRecommendation(selectedRecommendation);
         });
     })
@@ -50,37 +54,78 @@ function addKeyword(){
 
 async function sendKeyword(){
     addKeyword();
-    console.log(query.getKeyList());
     if(query.getKeyList().length == 0) return;
     const queryElementList = query.generateElementList();
     display.toggleOverlay();
     display.showPopUpRecommendation(queryElementList);
-    refreshRecommendation();
+    try{
+        refreshRecommendation(signal);
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 function clearPopUp(){
-    selectedRecommendation = undefined;
     display.toggleOverlay();
     display.hidePopUpRecommendation();
-
 }
 
-async function refreshRecommendation(){
+function reset(){
+    controller.abort();
     selectedRecommendation = undefined;
+    recommendationList = undefined;
+}
+
+async function refreshRecommendation(signal){
+    selectedRecommendation = undefined;
+    recommendationList = undefined;
+    let validRequest = true;
     display.clearRecommendation();
-    const recommendationList = await gpt.generateRecommendation(query.getKeyList());
-    let recommendationElements = display.generateRecommendationElements(recommendationList);
-    recommendationElements = addRecListener(recommendationElements);
-    display.appendRecommendation(recommendationElements);
+    signal.addEventListener('abort', () => {
+        validRequest = false;
+        console.log("aborting...");
+    });
+    try{
+        recommendationList = await gpt.generateRecommendation(query.getKeyList());
+        if(validRequest){
+            let recommendationElements = display.generateRecommendationElements(recommendationList);
+            recommendationElements = addRecListener(recommendationElements);
+            display.appendRecommendation(recommendationElements);
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+function askQuestion(){
+    if(recommendationList === undefined) return;
+    clearPopUp();
+    query.clear();
+    display.clearKeyword();
+    display.addUserChat(`<span>${recommendationList[selectedRecommendation]}</span>`, chatIndex++);
+    setTimeout(async () => {
+        display.addGPTChat("<div class='dot-flashing blue' style='margin: auto;'></div>", chatIndex);
+        try{
+            const gptResponse = await gpt.askQuestion(recommendationList[selectedRecommendation]);
+            display.updateChatContent(`<span>${gptResponse}</span>`, chatIndex);
+        }
+        catch(error){
+            display.updateChatContent("<span>Error :( silakan coba lagi</span>", chatIndex);
+        }
+    }, 500)
 }
 
 document.getElementById('plusButton').addEventListener('click', addKeyword);
 
 document.getElementById('sendButton').addEventListener('click', sendKeyword);
 
-document.getElementById('cancelButton').addEventListener('click', clearPopUp);
+document.getElementById('cancelButton').addEventListener('click', () => {clearPopUp(); reset()});
 
-document.getElementById('refreshButton').addEventListener('click', refreshRecommendation);
+document.getElementById('refreshButton').addEventListener('click', () => refreshRecommendation(signal));
+
+document.getElementById('submitButton').addEventListener('click', askQuestion);
 
 document.getElementById('textInput').addEventListener('keydown', (e) => {
     if(e.key === 'Enter'){

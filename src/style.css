@@ -10,6 +10,7 @@
 
 :root{
     font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 body, html{
@@ -176,6 +177,10 @@ div.chatbox.ai > div.right-box > div{
 
 div.chatbox.ai > div.content{
     background-color: #2D68DC;
+}
+
+div.content div{
+    width: 100%;
 }
 
 div.chatbox svg{
@@ -463,8 +468,8 @@ div#centerButtons > button{
     border-radius: 5px;
     background-color: #2D68DC;
     color: #2D68DC;
-    animation: dot-flashing 1s infinite linear alternate;
-    animation-delay: 0.5s;
+    animation: dot-flashing 0.6s infinite linear alternate;
+    animation-delay: 0.3s;
 }
 
 .loaded .dot-flashing{
@@ -485,7 +490,7 @@ div#centerButtons > button{
     border-radius: 5px;
     background-color: #2D68DC;
     color: #2D68DC;
-    animation: dot-flashing 1s infinite alternate;
+    animation: dot-flashing 0.6s infinite alternate;
     animation-delay: 0s;
 }
 
@@ -496,8 +501,8 @@ div#centerButtons > button{
     border-radius: 5px;
     background-color: #2D68DC;
     color: #2D68DC;
-    animation: dot-flashing 1s infinite alternate;
-    animation-delay: 1s;
+    animation: dot-flashing 0.6s infinite alternate;
+    animation-delay: 0.6s;
 }
   
 @keyframes dot-flashing {
@@ -506,5 +511,24 @@ div#centerButtons > button{
     }
     50%, 100% {
       background-color: rgba(152, 128, 255, 0.2);
+    }
+}
+
+div.content > div.dot-flashing.blue{
+    margin: auto;
+    width: 10px;
+}
+
+.dot-flashing.blue, .dot-flashing.blue::before, .dot-flashing.blue::after{
+    background-color: white;
+    animation-name: dot-flashing-blue;
+}
+
+@keyframes dot-flashing-blue {
+    0% {
+        background-color: white;
+    }
+    50%, 100% {
+        background-color: hsl(220, 71%, 80%);
     }
 }
