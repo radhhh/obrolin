@@ -1,4 +1,4 @@
-const APIKEY = "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";
+const awioawkoaakwoa = "SpLiT663NSPTC5qxp55eSlo4pT3BlbkFJWB8PHWq1vsRvSjVAS0Fi";
 
 const response1 = [
     "Ini pertanyaan 1",
@@ -35,7 +35,7 @@ async function getReply(message){
     const options = {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${APIKEY}`,
+            'Authorization': `Bearer sk-${awioawkoaakwoa.slice(5)}`,
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
