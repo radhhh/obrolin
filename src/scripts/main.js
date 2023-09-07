@@ -106,15 +106,16 @@ function askQuestion(){
     display.clearKeyword();
     display.addUserChat(`<span>${recommendationList[selectedRecommendation]}</span>`, chatIndex++);
     setTimeout(async () => {
-        display.addGPTChat("<div class='dot-flashing blue' style='margin: auto;'></div>", chatIndex);
+        const freezeChatIndex = chatIndex++;
+        display.addGPTChat("<div class='dot-flashing blue' style='margin: auto;'></div>", freezeChatIndex);
         try{
             const gptResponse = await gpt.askQuestion(recommendationList[selectedRecommendation]);
-            display.updateChatContent(`<span>${gptResponse}</span>`, chatIndex);
+            display.updateChatContent(`<span>${gptResponse}</span>`, freezeChatIndex);
         }
         catch(error){
-            display.updateChatContent("<span>Error :( silakan coba lagi</span>", chatIndex);
+            display.updateChatContent("<span>Error :( silakan coba lagi</span>", freezeChatIndex);
         }
-    }, 500)
+    }, 500);
 }
 
 document.getElementById('plusButton').addEventListener('click', addKeyword);

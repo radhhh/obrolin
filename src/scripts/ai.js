@@ -45,7 +45,6 @@ async function getReply(message){
     };
     const response = await fetch('https://api.openai.com/v1/chat/completions', options);
     const data = await response.json();
-    console.log(data);
     return data["choices"][0]["message"]["content"];
 }
 
@@ -95,7 +94,6 @@ export async function askQuestion(question){
                                         return `<div>${'\u00a0'.repeat(whitespaceCount)+line.slice(whitespaceCount)}</div>\n`;
                                     })
                                     .join('');
-        console.log(finalResponse);
         return finalResponse;
     }
     catch(err){

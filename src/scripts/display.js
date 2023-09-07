@@ -1,5 +1,4 @@
 export function appendKeyword(newKeyword){
-    // console.log(keyword);
     const keywordContainer = document.getElementById('keywordContainer');
     keywordContainer.appendChild(newKeyword);
 }
@@ -135,16 +134,11 @@ export function addGPTChat(message, chatIndex){
 }
 
 export function updateChatContent(message, chatIndex){
-    console.log(`#chat-${chatIndex} div.content`);
     const targetContent = document.querySelector(`#chat-${chatIndex} div.content`);
     targetContent.innerHTML = `${message}`;
-    targetContent.scrollIntoView();
-    scrollIntoTop(document.getElementById(`chat-${chatIndex}`));
+    scrollIntoTop(document.getElementById(`chat-${chatIndex-1}`));
 }
 
 function scrollIntoTop(targetElement){
-    targetElement.scrollTo({
-        top: 0,
-        behavior: "smooth",
-    })
+    targetElement.scrollIntoView();
 }
