@@ -3,6 +3,7 @@ import * as display from './display.js';
 import * as gpt from './ai.js';
 import "../style.css";
 
+let chatHistory = [];
 let recommendationList = undefined;
 let selectedRecommendation = undefined;
 let chatIndex = 0;
@@ -104,15 +105,19 @@ function askQuestion(){
     clearPopUp();
     query.clear();
     display.clearKeyword();
+    chatHistory.push(`${recommendationList[selectedRecommendation]}`);
     display.addUserChat(`<span>${recommendationList[selectedRecommendation]}</span>`, chatIndex++);
     setTimeout(async () => {
         const freezeChatIndex = chatIndex++;
+        chatHistory.push('loading');
         display.addGPTChat("<div class='dot-flashing blue' style='margin: auto;'></div>", freezeChatIndex);
         try{
             const gptResponse = await gpt.askQuestion(recommendationList[selectedRecommendation]);
+            chatHistory[freezeChatIndex] = gptResponse;
             display.updateChatContent(`<span>${gptResponse}</span>`, freezeChatIndex);
         }
         catch(error){
+            chatHistory[freezeChatIndex] = "Error, silakan coba lagi";
             display.updateChatContent("<span>Error :( silakan coba lagi</span>", freezeChatIndex);
         }
     }, 500);
@@ -138,4 +143,9 @@ document.getElementById('textInput').addEventListener('keydown', (e) => {
             addKeyword();
         }
     }
-})
+});
+
+// display.addUserChat("<span>Halo ini testing doang</span>", chatIndex++);
+// display.addGPTChat("<span>Halo ini kalimat random yang digenerate oleh orang gabut seperti radhya \
+// yang gunanya cuma buat template supaya kita ada gambaran mengenai apa saja yang harus ditampilkan \
+// dengan baik kepada user. Terutama dalam bentuk tombol speaker text-to-speech", chatIndex++);

@@ -45,6 +45,7 @@ async function getReply(message){
     };
     const response = await fetch('https://api.openai.com/v1/chat/completions', options);
     const data = await response.json();
+    console.log(data);
     return data["choices"][0]["message"]["content"];
 }
 
@@ -97,6 +98,6 @@ export async function askQuestion(question){
         return finalResponse;
     }
     catch(err){
-        console.log(err);
+        throw new Error("No respond")
     }
 }
