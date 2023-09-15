@@ -7,6 +7,7 @@ module.exports = {
       display: "./src/scripts/display.js",
       query: "./src/scripts/query.js",
       ai: "./src/scripts/ai.js",
+      tts: "./src/scripts/tts.js",
       main: "./src/scripts/main.js",
   },
   devtool: "inline-source-map",

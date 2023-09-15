@@ -54,7 +54,8 @@ export async function generateRecommendation(keywordList){
         try{
             const response = await getReply([
                 {role: "system", content: "User akan memberikan kata kunci yang dipisahkan oleh koma,\
-                kamu harus memberikan list 5 pertanyaan yang relevan dengan kata kunci tersebut tanpa kata pengantar"},
+                kamu harus memberikan list 5 pertanyaan sederhana yang relevan dengan kata kunci tersebut tanpa kata pengantar.\
+                Kata kunci bisa memiliki kesalahan penulisan dan kamu harus mengantisipasinya!"},
                 {role: "user", content: keywordList.join(', ')},
             ]);
             const finalResponse = response.split(/\n/)
@@ -85,17 +86,7 @@ export async function askQuestion(question){
             {role: "system", content: "User akan memberikan pertanyaan. Kamu harus memberikan jawaban dengan kata-kata dan penjelasan yang mudah dipahami"},
             {role: "user", content: `${question}`}
         ]);
-        const finalResponse = response
-                                    .split('\n')
-                                    .filter((line) => {
-                                        return line !== "";
-                                    })
-                                    .map((line) => {
-                                        const whitespaceCount = line.search(/\S|$/);
-                                        return `<div>${'\u00a0'.repeat(whitespaceCount)+line.slice(whitespaceCount)}</div>\n`;
-                                    })
-                                    .join('');
-        return finalResponse;
+        return response;
     }
     catch(err){
         throw new Error("No respond")

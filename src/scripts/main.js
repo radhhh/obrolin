@@ -1,6 +1,7 @@
 import * as query from "./query.js";
 import * as display from './display.js';
 import * as gpt from './ai.js';
+import * as tts from './tts.js';
 import "../style.css";
 
 let chatHistory = [];
@@ -39,6 +40,20 @@ function addKeywordListener(element){
         e.currentTarget.classList.remove('select-mode');
     });
     return element;
+}
+
+function activateChatSpeak(chatIndex){
+    const button = document.querySelector(`#chatSpeak-${chatIndex}`)
+    button.addEventListener('click', () => {
+        if(button.classList.contains('playing')){
+            button.classList.remove('playing');
+            tts.stopSpeak();
+        }  
+        else {
+            button.classList.add('playing')
+            tts.startSpeak(chatHistory[chatIndex]);
+        }
+    });
 }
 
 function addKeyword(){
@@ -96,7 +111,7 @@ async function refreshRecommendation(signal){
         }
     }
     catch(err){
-        console.log(err);
+        display.appendRecommendation([]);
     }
 }
 
@@ -106,15 +121,25 @@ function askQuestion(){
     query.clear();
     display.clearKeyword();
     chatHistory.push(`${recommendationList[selectedRecommendation]}`);
-    display.addUserChat(`<span>${recommendationList[selectedRecommendation]}</span>`, chatIndex++);
+    display.addUserChat(`<span>${recommendationList[selectedRecommendation]}</span>`, chatIndex);
+    activateChatSpeak(chatIndex++);
     setTimeout(async () => {
         const freezeChatIndex = chatIndex++;
         chatHistory.push('loading');
         display.addGPTChat("<div class='dot-flashing blue' style='margin: auto;'></div>", freezeChatIndex);
+        display.focusElement('#textInput');
+        activateChatSpeak(freezeChatIndex);
         try{
             const gptResponse = await gpt.askQuestion(recommendationList[selectedRecommendation]);
+            const finalResponse = gptResponse.split('\n')
+                                            .filter((line) => (line !== ""))
+                                            .map((line) => {
+                                                const whitespaceCount = line.search(/\S|$/);
+                                                return `<div>${'\u00a0'.repeat(whitespaceCount)+line.slice(whitespaceCount)}</div>\n`;
+                                            })
+                                            .join('');
             chatHistory[freezeChatIndex] = gptResponse;
-            display.updateChatContent(`<span>${gptResponse}</span>`, freezeChatIndex);
+            display.updateChatContent(`<span>${finalResponse}</span>`, freezeChatIndex);
         }
         catch(error){
             chatHistory[freezeChatIndex] = "Error, silakan coba lagi";
