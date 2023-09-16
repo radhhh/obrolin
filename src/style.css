@@ -14,6 +14,7 @@
 }
 
 body, html{
+    background-color: #FBFBFF;
     min-height: 100%;
     width: 100%;
 }
@@ -30,7 +31,7 @@ header{
     z-index: 100;
     padding: 1em 2em;
     box-sizing: border-box;
-    background-color: white;
+    background-color: #FBFBFF;
 }
 
 header > div.container{
@@ -53,7 +54,7 @@ header button{
     display: block;
     box-sizing: border-box;
     border: none;
-    background-color: white;
+    background-color: #FBFBFF;
 }
 
 button svg path#Info-Square-2{
@@ -137,7 +138,7 @@ div.chatsection.ai.playing h3{
 
 
 div.chatbox{
-    color: white;
+    color: #FBFBFF;
     font-size: 1rem;
     display: flex;
     width: fit-content;
@@ -243,7 +244,7 @@ section#inputContainer{
     bottom: 0;
     width: 100%;
     box-sizing: border-box;
-    background-color: white;
+    background-color: #FBFBFF;
     padding: 1.2em 1.5em 1.2em;
 }
 
@@ -274,13 +275,19 @@ button#voiceInputButton > svg{
     padding: 5.417px 10.833px;
 }
 
+button#voiceInputButton.recording,
+button#voiceInputButton.recording:hover{
+    transform: scale(1.1);
+    background-color: #26252A;
+}
+
 div#middleInputContainer{
     flex: 1;
 }
 
 div#middleInputContainer > textarea{
     letter-spacing: 0.5px;
-    color: white;
+    color: #FBFBFF;
     height: 2.5em;
     font-size: 1rem;
     padding: 0.6em 0.5em 0.4em;
@@ -308,7 +315,7 @@ div#middleInputContainer > div#keywordContainer{
 }
 
 .keyword{
-    color: white;
+    color: #FBFBFF;
     font-size: 0.9rem;
     display: inline-block;
     padding: 0.3em 0.8em;
@@ -343,7 +350,7 @@ div#keywordContainer .keyword.select-mode:hover{
 
 div#keywordContainer .keyword.select-mode .keyword-close{
     text-align: center;
-    color: white;
+    color: #FBFBFF;
     font-weight: 900;
     opacity: 1;
     display: block;
@@ -408,7 +415,7 @@ div#recommendationPopUp{
     border-radius: 0.5em;
     z-index: 300;
     padding: 1.2em 1em 1em;
-    background-color: white;
+    background-color: #FBFBFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.149) inset;
 }
 
@@ -423,7 +430,7 @@ div#recommendationPopUp > div{
 div.recommendation{
     cursor: pointer;
     font-size: 1rem;
-    color: white;
+    color: #FBFBFF;
     background-color: #2D68DC;
     padding: 0.5em 0.7em;
     border-radius: 0.5em;
@@ -454,7 +461,7 @@ div#actionButtons{
 button#refreshButton{
     display: none;
     font-size: 1rem;
-    background-color: white;
+    background-color: #FBFBFF;
     box-shadow: none;
     border: none;
     text-decoration: underline;
@@ -480,7 +487,7 @@ div#centerButtons{
 
 div#centerButtons > button{
     font-size: 1rem;
-    color: white;
+    color: #FBFBFF;
     width: 12ch;
     height: 1.8em;
     background-color: #2D68DC;
@@ -556,13 +563,13 @@ div.content > div.dot-flashing.blue{
 }
 
 .dot-flashing.blue, .dot-flashing.blue::before, .dot-flashing.blue::after{
-    background-color: white;
+    background-color: #FBFBFF;
     animation-name: dot-flashing-blue;
 }
 
 @keyframes dot-flashing-blue {
     0% {
-        background-color: white;
+        background-color: #FBFBFF;
     }
     50%, 100% {
         background-color: hsl(220, 71%, 80%);

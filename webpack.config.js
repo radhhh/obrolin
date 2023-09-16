@@ -8,6 +8,7 @@ module.exports = {
       query: "./src/scripts/query.js",
       ai: "./src/scripts/ai.js",
       tts: "./src/scripts/tts.js",
+      stt: "./src/scripts/stt.js",
       main: "./src/scripts/main.js",
   },
   devtool: "inline-source-map",

@@ -2,6 +2,7 @@ import * as query from "./query.js";
 import * as display from './display.js';
 import * as gpt from './ai.js';
 import * as tts from './tts.js';
+import * as stt from './stt.js';
 import "../style.css";
 
 let chatHistory = [];
@@ -11,32 +12,36 @@ let chatIndex = 0;
 const controller = new AbortController();
 let signal = controller.signal;
 
+const voiceInputButton = document.getElementById('voiceInputButton');
+const plusButton = document.getElementById('plusButton');
+const sendButton = document.getElementById('sendButton');
+const cancelButton = document.getElementById('cancelButton');
+const refreshButton = document.getElementById('refreshButton');
+const submitButton = document.getElementById('submitButton');
+const textInput = document.getElementById('textInput');
+
 function addKeywordListener(element){
     element.addEventListener('click', (e) => {
-        const target = e.currentTarget;
-        if(target.classList.contains('select-mode')){
-            const targetID = e.currentTarget.id.replace('keyword-', '');
-            query.removeKeyword(targetID);
-            target.remove();
+        if(element.classList.contains('select-mode')){
+            query.removeKeyword(element.id);
+            element.remove();
         }
         else{
-            target.classList.add('select-mode');
+            element.classList.add('select-mode');
         }
     });
     element.addEventListener('mouseleave', (e) => {
-        e.currentTarget.classList.remove('select-mode');
+        element.classList.remove('select-mode');
     });
-    return element;
 }
 
 function addKeyword(){
-    const textInput = document.getElementById('textInput');
     if(textInput.value === ''){
         return;
     }
     const elementID = query.addKeyword(textInput.value);
     let keywordElement = query.generateSingleHTML(textInput.value, true, elementID);
-    keywordElement = addKeywordListener(keywordElement);
+    addKeywordListener(keywordElement);
     display.appendKeyword(keywordElement);
     textInput.value = '';
 }
@@ -140,23 +145,40 @@ function askQuestion(){
     }, 500);
 }
 
-document.getElementById('plusButton').addEventListener('click', addKeyword);
+stt.report.addEventListener('result', (e) => {
+    textInput.value = e.detail;
+})
 
-document.getElementById('sendButton').addEventListener('click', sendKeyword);
+// initializing all buttons
+voiceInputButton.addEventListener('click', () => {
+    if(voiceInputButton.classList.contains('recording')){
+        voiceInputButton.classList.remove('recording');
+        stt.stop();
+    }  
+    else{
+        voiceInputButton.classList.add('recording');
+        if(textInput.value !== '') addKeyword();
+        stt.start();
+    }
+});
 
-document.getElementById('cancelButton').addEventListener('click', () => {clearPopUp(); reset()});
+plusButton.addEventListener('click', addKeyword);
 
-document.getElementById('refreshButton').addEventListener('click', () => refreshRecommendation(signal));
+sendButton.addEventListener('click', sendKeyword);
 
-document.getElementById('submitButton').addEventListener('click', () => {
+cancelButton.addEventListener('click', () => {clearPopUp(); reset()});
+
+refreshButton.addEventListener('click', () => refreshRecommendation(signal));
+
+submitButton.addEventListener('click', () => {
     if(recommendationList === undefined || !display.state.popUp) return;
     askQuestion();
 });
 
-document.getElementById('textInput').addEventListener('keydown', (e) => {
+textInput.addEventListener('keydown', (e) => {
     if(e.key === 'Enter'){
         e.preventDefault();
-        if(document.getElementById('textInput').value === ''){
+        if(textInput.value === ''){
             sendKeyword();
         }
         else{
