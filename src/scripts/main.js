@@ -161,7 +161,7 @@ document.getElementById('submitButton').addEventListener('click', askQuestion);
 document.getElementById('textInput').addEventListener('keydown', (e) => {
     if(e.key === 'Enter'){
         e.preventDefault();
-        if(e.ctrlKey){
+        if(document.getElementById('textInput').value === ''){
             sendKeyword();
         }
         else{
