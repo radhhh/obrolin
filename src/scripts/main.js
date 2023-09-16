@@ -43,17 +43,9 @@ function addKeywordListener(element){
 }
 
 function activateChatSpeak(chatIndex){
-    const button = document.querySelector(`#chatSpeak-${chatIndex}`)
-    button.addEventListener('click', () => {
-        if(button.classList.contains('playing')){
-            button.classList.remove('playing');
-            tts.stopSpeak();
-        }  
-        else {
-            button.classList.add('playing')
-            tts.startSpeak(chatHistory[chatIndex]);
-        }
-    });
+    tts.initElement(document.querySelector(`#chat-${chatIndex}`),
+                document.querySelector(`#chatSpeak-${chatIndex}`),
+                chatHistory[chatIndex]);
 }
 
 function addKeyword(){
@@ -128,21 +120,22 @@ function askQuestion(){
         chatHistory.push('loading');
         display.addGPTChat("<div class='dot-flashing blue' style='margin: auto;'></div>", freezeChatIndex);
         display.focusElement('#textInput');
-        activateChatSpeak(freezeChatIndex);
         try{
             const gptResponse = await gpt.askQuestion(recommendationList[selectedRecommendation]);
             const finalResponse = gptResponse.split('\n')
-                                            .filter((line) => (line !== ""))
-                                            .map((line) => {
-                                                const whitespaceCount = line.search(/\S|$/);
-                                                return `<div>${'\u00a0'.repeat(whitespaceCount)+line.slice(whitespaceCount)}</div>\n`;
-                                            })
-                                            .join('');
+            .filter((line) => (line !== ""))
+            .map((line) => {
+                const whitespaceCount = line.search(/\S|$/);
+                return `<div>${'\u00a0'.repeat(whitespaceCount)+line.slice(whitespaceCount)}</div>\n`;
+            })
+            .join('');
             chatHistory[freezeChatIndex] = gptResponse;
+            activateChatSpeak(freezeChatIndex);
             display.updateChatContent(`<span>${finalResponse}</span>`, freezeChatIndex);
         }
         catch(error){
             chatHistory[freezeChatIndex] = "Error, silakan coba lagi";
+            activateChatSpeak(freezeChatIndex);
             display.updateChatContent("<span>Error :( silakan coba lagi</span>", freezeChatIndex);
         }
     }, 500);
