@@ -11,19 +11,6 @@ let chatIndex = 0;
 const controller = new AbortController();
 let signal = controller.signal;
 
-function addRecListener(elementList){
-    elementList.forEach((element) => {
-        element.addEventListener('click', () => {
-            if(selectedRecommendation !== undefined){
-                display.unselectRecommendation(selectedRecommendation);
-            }
-            selectedRecommendation = parseInt(element.id.replace('recommendation-', ''));
-            display.selectRecommendation(selectedRecommendation);
-        });
-    })
-    return elementList;
-}
-
 function addKeywordListener(element){
     element.addEventListener('click', (e) => {
         const target = e.currentTarget;
@@ -40,12 +27,6 @@ function addKeywordListener(element){
         e.currentTarget.classList.remove('select-mode');
     });
     return element;
-}
-
-function activateChatSpeak(chatIndex){
-    tts.initElement(document.querySelector(`#chat-${chatIndex}`),
-                document.querySelector(`#chatSpeak-${chatIndex}`),
-                chatHistory[chatIndex]);
 }
 
 function addKeyword(){
@@ -85,6 +66,19 @@ function reset(){
     recommendationList = undefined;
 }
 
+function addRecListener(elementList){
+    elementList.forEach((element) => {
+        element.addEventListener('click', () => {
+            if(selectedRecommendation !== undefined){
+                display.unselectRecommendation(selectedRecommendation);
+            }
+            selectedRecommendation = parseInt(element.id.replace('recommendation-', ''));
+            display.selectRecommendation(selectedRecommendation);
+        });
+    })
+    return elementList;
+}
+
 async function refreshRecommendation(signal){
     selectedRecommendation = undefined;
     recommendationList = undefined;
@@ -105,6 +99,12 @@ async function refreshRecommendation(signal){
     catch(err){
         display.appendRecommendation([]);
     }
+}
+
+function activateChatSpeak(chatIndex){
+    tts.initElement(document.querySelector(`#chat-${chatIndex}`),
+                document.querySelector(`#chatSpeak-${chatIndex}`),
+                chatHistory[chatIndex]);
 }
 
 function askQuestion(){
