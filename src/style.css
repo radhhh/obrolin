@@ -115,13 +115,26 @@ div.chatsection h3 > button > svg{
     height: 1.4em;
 }
 
-div.chatsection.user h3 > button:hover svg{
+div.chatsection.user h3 > button:hover svg,
+div.chatsection.user.playing h3 > button svg{
     filter: invert(10%) sepia(5%) saturate(1214%) hue-rotate(211deg) brightness(97%) contrast(89%);
 }
 
-div.chatsection.ai h3 > button:hover svg{
+div.chatsection.ai h3 > button:hover svg,
+div.chatsection.ai.playing h3 > button svg{
     filter: invert(44%) sepia(13%) saturate(5402%) hue-rotate(196deg) brightness(84%) contrast(107%);
 }
+
+div.chatsection.user.playing h3{
+    font-weight: 900;
+    color: #26252A;
+}
+
+div.chatsection.ai.playing h3{
+    font-weight: 900;
+    color: #2D68DC;
+}
+
 
 div.chatbox{
     color: white;

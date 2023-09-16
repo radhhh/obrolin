@@ -108,7 +108,7 @@ function activateChatSpeak(chatIndex){
 }
 
 function askQuestion(){
-    if(recommendationList === undefined) return;
+    display.focusElement('main');
     clearPopUp();
     query.clear();
     display.clearKeyword();
@@ -119,7 +119,6 @@ function askQuestion(){
         const freezeChatIndex = chatIndex++;
         chatHistory.push('loading');
         display.addGPTChat("<div class='dot-flashing blue' style='margin: auto;'></div>", freezeChatIndex);
-        display.focusElement('#textInput');
         try{
             const gptResponse = await gpt.askQuestion(recommendationList[selectedRecommendation]);
             const finalResponse = gptResponse.split('\n')
@@ -149,7 +148,10 @@ document.getElementById('cancelButton').addEventListener('click', () => {clearPo
 
 document.getElementById('refreshButton').addEventListener('click', () => refreshRecommendation(signal));
 
-document.getElementById('submitButton').addEventListener('click', askQuestion);
+document.getElementById('submitButton').addEventListener('click', () => {
+    if(recommendationList === undefined || !display.state.popUp) return;
+    askQuestion();
+});
 
 document.getElementById('textInput').addEventListener('keydown', (e) => {
     if(e.key === 'Enter'){
@@ -162,8 +164,3 @@ document.getElementById('textInput').addEventListener('keydown', (e) => {
         }
     }
 });
-
-// display.addUserChat("<span>Halo ini testing doang</span>", chatIndex++);
-// display.addGPTChat("<span>Halo ini kalimat random yang digenerate oleh orang gabut seperti radhya \
-// yang gunanya cuma buat template supaya kita ada gambaran mengenai apa saja yang harus ditampilkan \
-// dengan baik kepada user. Terutama dalam bentuk tombol speaker text-to-speech", chatIndex++);

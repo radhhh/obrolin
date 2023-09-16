@@ -1,3 +1,7 @@
+export let state = {
+    popUp: false,
+}
+
 export function focusElement(selector){
     const selected = document.querySelector(selector);
     selected.focus()
@@ -24,6 +28,7 @@ export function toggleOverlay(){
 
 export function showPopUpRecommendation(keywordElementList){
     document.getElementById('recommendationPopUp').classList.remove('hidden');
+    state.popUp = true;
     const keywordContainer = document.getElementById('recommendationKeywordContainer');
     keywordElementList.forEach((element) => {
         keywordContainer.appendChild(element);
@@ -76,6 +81,7 @@ export function unselectRecommendation(index){
 
 export function hidePopUpRecommendation(){
     document.getElementById('recommendationPopUp').classList.add('hidden');
+    state.popUp = false;
     clearRecommendation();
     clearRecommendationKeyword();
 }
