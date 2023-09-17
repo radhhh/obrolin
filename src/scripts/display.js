@@ -1,58 +1,47 @@
-export let state = {
-    popUp: false,
-}
+const keywordContainer = document.getElementById('keywordContainer');
+const recommendationKeywordContainer = document.getElementById('recommendationKeywordContainer');
+const recommendationPopUp = document.getElementById('recommendationPopUp');
+const darkOverlay = document.getElementById('darkOverlay');
+const questionContainer = document.getElementById('recommendationQuestionContainer');
+const main = document.querySelector('main');
 
-export function focusElement(selector){
-    const selected = document.querySelector(selector);
-    selected.focus()
+export function getState(query){
+    switch(query){
+        case "popUpOpen":
+            return !(recommendationPopUp.classList.contains('hidden'));
+        case "popUpLoaded":
+            return recommendationPopUp.classList.contains('loaded');
+    }
 }
 
 export function appendKeyword(newKeyword){
-    const keywordContainer = document.getElementById('keywordContainer');
     keywordContainer.appendChild(newKeyword);
 }
 
 export function clearKeyword(){
-    const keywordContainer = document.getElementById('keywordContainer');
-    while(keywordContainer.firstChild) keywordContainer.removeChild(keywordContainer.firstChild);
-}
-
-export function clearRecommendationKeyword(){
-    const keywordContainer = document.getElementById('recommendationKeywordContainer');
     while(keywordContainer.firstChild) keywordContainer.removeChild(keywordContainer.firstChild);
 }
 
 export function toggleOverlay(){
-    document.getElementById('darkOverlay').classList.toggle('hidden');
+    darkOverlay.classList.toggle('hidden');
 }
 
 export function showPopUpRecommendation(keywordElementList){
-    document.getElementById('recommendationPopUp').classList.remove('hidden');
-    state.popUp = true;
-    const keywordContainer = document.getElementById('recommendationKeywordContainer');
+    recommendationPopUp.classList.remove('hidden');
     keywordElementList.forEach((element) => {
-        keywordContainer.appendChild(element);
+        recommendationKeywordContainer.appendChild(element);
     });
 }
 
-function toggleRecommendationLoaded(param){
-    const recommendationPopUp = document.getElementById('recommendationPopUp');
-    if(param == "add") recommendationPopUp.classList.add('loaded');
-    else if(param == "remove") recommendationPopUp.classList.remove('loaded');
-    else recommendationPopUp.classList.toggle('loaded');
-}
-
 export function appendRecommendation(elementList){
-    toggleRecommendationLoaded('add');
-    const questionContainer = document.getElementById('recommendationQuestionContainer');
+    recommendationPopUp.classList.add('loaded');
     elementList.forEach((element) => {
         questionContainer.appendChild(element);
     });
 }
 
 export function clearRecommendation(){
-    toggleRecommendationLoaded('remove');
-    const questionContainer = document.getElementById('recommendationQuestionContainer');
+    recommendationPopUp.classList.remove('loaded');
     while(questionContainer.firstChild) questionContainer.removeChild(questionContainer.firstChild);
 }
 
@@ -78,16 +67,21 @@ export function unselectRecommendation(index){
     target.classList.remove('selected');
 }
 
+export function clearRecommendationKeyword(){
+    while(recommendationKeywordContainer.firstChild) recommendationKeywordContainer.removeChild(recommendationKeywordContainer.firstChild);
+}
 
 export function hidePopUpRecommendation(){
-    document.getElementById('recommendationPopUp').classList.add('hidden');
-    state.popUp = false;
+    recommendationPopUp.classList.add('hidden');
     clearRecommendation();
     clearRecommendationKeyword();
 }
 
+function scrollIntoTop(targetElement){
+    targetElement.scrollIntoView();
+}
+
 export function addUserChat(message, chatIndex){
-    const main = document.querySelector('main');
     const chatElement = document.createElement('div');
     chatElement.classList.add("chatsection", "user", "loaded");
     chatElement.id = `chat-${chatIndex}`;
@@ -124,7 +118,6 @@ export function addUserChat(message, chatIndex){
 }
 
 export function addGPTChat(message, chatIndex){
-    const main = document.querySelector('main');
     const chatElement = document.createElement('div');
     chatElement.classList.add("chatsection", "ai");
     chatElement.id = `chat-${chatIndex}`;
@@ -165,8 +158,4 @@ export function updateChatContent(message, chatIndex){
     const targetContent = document.querySelector(`#chat-${chatIndex} div.content`);
     targetContent.innerHTML = `${message}`;
     scrollIntoTop(document.getElementById(`chat-${chatIndex-1}`));
-}
-
-function scrollIntoTop(targetElement){
-    targetElement.scrollIntoView();
 }

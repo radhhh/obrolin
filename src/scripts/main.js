@@ -20,10 +20,10 @@ const refreshButton = document.getElementById('refreshButton');
 const submitButton = document.getElementById('submitButton');
 const textInput = document.getElementById('textInput');
 
-function addKeywordListener(element){
+function addKeywordListener(element, keywordIndex){
     element.addEventListener('click', (e) => {
         if(element.classList.contains('select-mode')){
-            query.removeKeyword(element.id);
+            query.removeKeyword(keywordIndex.toString());
             element.remove();
         }
         else{
@@ -39,9 +39,9 @@ function addKeyword(){
     if(textInput.value === ''){
         return;
     }
-    const elementID = query.addKeyword(textInput.value);
-    let keywordElement = query.generateSingleHTML(textInput.value, true, elementID);
-    addKeywordListener(keywordElement);
+    const keywordIndex = query.addKeyword(textInput.value);
+    let keywordElement = query.generateSingleHTML(textInput.value, true, keywordIndex);
+    addKeywordListener(keywordElement, keywordIndex);
     display.appendKeyword(keywordElement);
     textInput.value = '';
 }
@@ -50,6 +50,7 @@ async function sendKeyword(){
     addKeyword();
     if(query.getKeyList().length == 0) return;
     const queryElementList = query.generateElementList();
+    textInput.blur();
     display.toggleOverlay();
     display.showPopUpRecommendation(queryElementList);
     try{
@@ -72,12 +73,12 @@ function reset(){
 }
 
 function addRecListener(elementList){
-    elementList.forEach((element) => {
+    elementList.forEach((element, index) => {
         element.addEventListener('click', () => {
             if(selectedRecommendation !== undefined){
                 display.unselectRecommendation(selectedRecommendation);
             }
-            selectedRecommendation = parseInt(element.id.replace('recommendation-', ''));
+            selectedRecommendation = index;
             display.selectRecommendation(selectedRecommendation);
         });
     })
@@ -113,7 +114,7 @@ function activateChatSpeak(chatIndex){
 }
 
 function askQuestion(){
-    display.focusElement('main');
+    textInput.focus();
     clearPopUp();
     query.clear();
     display.clearKeyword();
@@ -154,7 +155,9 @@ voiceInputButton.addEventListener('click', () => {
     if(voiceInputButton.classList.contains('recording')){
         voiceInputButton.classList.remove('recording');
         stt.stop();
-    }  
+        voiceInputButton.blur();
+        textInput.focus();
+    }
     else{
         voiceInputButton.classList.add('recording');
         if(textInput.value !== '') addKeyword();
@@ -171,18 +174,57 @@ cancelButton.addEventListener('click', () => {clearPopUp(); reset()});
 refreshButton.addEventListener('click', () => refreshRecommendation(signal));
 
 submitButton.addEventListener('click', () => {
-    if(recommendationList === undefined || !display.state.popUp) return;
+    if(recommendationList === undefined || !display.getState('popUpOpen')) return;
     askQuestion();
+    submitButton.blur();
 });
 
-textInput.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter'){
-        e.preventDefault();
-        if(textInput.value === ''){
-            sendKeyword();
+window.addEventListener('keydown', (e) => {
+    if(display.getState('popUpLoaded')){
+        switch(e.key){
+            case 'ArrowUp':
+                document.getElementById(`recommendation-${selectedRecommendation !== undefined ? (selectedRecommendation + 4) % 5 : 0}`)
+                    .dispatchEvent(new Event('click'));
+                break;
+            case 'ArrowDown':
+                document.getElementById(`recommendation-${selectedRecommendation !== undefined ? (selectedRecommendation + 1) % 5 : 0}`)
+                    .dispatchEvent(new Event('click'));
+                break;
+            case 'Enter':
+                e.preventDefault();
+                submitButton.dispatchEvent(new Event('click'));
+                break;
+            case 'r':
+                e.preventDefault();
+                refreshButton.dispatchEvent(new Event('click'));
+                break;
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+                e.preventDefault();
+                document.getElementById(`recommendation-${parseInt(e.key) - 1}`).dispatchEvent(new Event('click'));
+                break;
         }
-        else{
-            addKeyword();
+    }
+    else if(display.getState('popUpOpen')){
+        switch(e.key){
+            case 'Escape':
+                cancelButton.dispatchEvent(new Event('click'));
+        }
+    }
+    else{
+        switch(e.key){
+            case 'Enter':
+                e.preventDefault();
+                if(textInput.value === ''){
+                    sendKeyword();
+                }
+                else{
+                    addKeyword();
+                }
+                break;
         }
     }
 });

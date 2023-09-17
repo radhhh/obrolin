@@ -11,8 +11,6 @@ export function getKeyList(){
 }
 
 export function removeKeyword(removedIndex){ //input in string
-    if(typeof removedIndex != "string") removedIndex = toString(removedIndex);
-    if(!(removedIndex in keywordList)) return;
     delete keywordList[removedIndex];
 }
 
