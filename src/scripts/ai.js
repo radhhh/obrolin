@@ -23,6 +23,14 @@ export async function demo(){
     console.log(result);
 }
 
+export async function demoRefreshRecommendation(){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(response2);
+        }, 1000)
+    });
+}
+
 async function delay(time){
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -45,7 +53,6 @@ async function getReply(message){
     };
     const response = await fetch('https://api.openai.com/v1/chat/completions', options);
     const data = await response.json();
-    console.log(data);
     return data["choices"][0]["message"]["content"];
 }
 
@@ -70,14 +77,6 @@ export async function generateRecommendation(keywordList){
         }
     }
     throw new Error('Failed Request')
-}
-
-export async function refreshRecommendation(){
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(response2);
-        }, 1000)
-    });
 }
 
 export async function askQuestion(question){

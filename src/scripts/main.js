@@ -72,15 +72,18 @@ function reset(){
     recommendationList = undefined;
 }
 
-function addRecListener(elementList){
+function addRecListener(elementList, recommendationList){
     elementList.forEach((element, index) => {
-        element.addEventListener('click', () => {
+        element.addEventListener('click', (e) => {
+            if(!(e.target.classList.contains('recommendation') || 
+            e.target.classList.contains('content'))) return;
             if(selectedRecommendation !== undefined){
                 display.unselectRecommendation(selectedRecommendation);
             }
             selectedRecommendation = index;
             display.selectRecommendation(selectedRecommendation);
         });
+        tts.initElement(element, element.querySelector('.recommendation-speak'), recommendationList[index]);
     })
     return elementList;
 }
@@ -98,7 +101,7 @@ async function refreshRecommendation(signal){
         recommendationList = await gpt.generateRecommendation(query.getKeyList());
         if(validRequest){
             let recommendationElements = display.generateRecommendationElements(recommendationList);
-            recommendationElements = addRecListener(recommendationElements);
+            recommendationElements = addRecListener(recommendationElements, recommendationList);
             display.appendRecommendation(recommendationElements);
         }
     }
@@ -180,13 +183,21 @@ submitButton.addEventListener('click', () => {
 });
 
 window.addEventListener('keydown', (e) => {
+    if(display.getState('popUpOpen')){
+        switch(e.key){
+            case 'Escape':
+                cancelButton.dispatchEvent(new Event('click'));
+        }
+    }
     if(display.getState('popUpLoaded')){
         switch(e.key){
             case 'ArrowUp':
+                e.preventDefault();
                 document.getElementById(`recommendation-${selectedRecommendation !== undefined ? (selectedRecommendation + 4) % 5 : 0}`)
                     .dispatchEvent(new Event('click'));
                 break;
             case 'ArrowDown':
+                e.preventDefault();
                 document.getElementById(`recommendation-${selectedRecommendation !== undefined ? (selectedRecommendation + 1) % 5 : 0}`)
                     .dispatchEvent(new Event('click'));
                 break;
@@ -206,12 +217,6 @@ window.addEventListener('keydown', (e) => {
                 e.preventDefault();
                 document.getElementById(`recommendation-${parseInt(e.key) - 1}`).dispatchEvent(new Event('click'));
                 break;
-        }
-    }
-    else if(display.getState('popUpOpen')){
-        switch(e.key){
-            case 'Escape':
-                cancelButton.dispatchEvent(new Event('click'));
         }
     }
     else{
