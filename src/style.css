@@ -109,7 +109,7 @@ div.chatsection h3 > button{
 }
 
 div.chatsection.loaded h3 > button{
-    display: inline;
+    display: inline-block;
 }
 
 div.chatsection h3 > button > svg{
@@ -125,6 +125,10 @@ div.chatsection.user.playing h3 > button svg{
 div.chatsection.ai h3 > button:hover svg,
 div.chatsection.ai.playing h3 > button svg{
     filter: invert(44%) sepia(13%) saturate(5402%) hue-rotate(196deg) brightness(84%) contrast(107%);
+}
+
+div.chatsection.playing h3 > button svg{
+    animation: cycleSize 0.8s infinite linear alternate;
 }
 
 div.chatsection.user.playing h3{
@@ -276,9 +280,21 @@ button#voiceInputButton > svg{
     padding: 5.417px 10.833px;
 }
 
+@keyframes cycleSize {
+    0% {
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(1.06);
+    }
+    100%{
+        transform: scale(1.12);
+    }
+}
+
 button#voiceInputButton.recording,
 button#voiceInputButton.recording:hover{
-    transform: scale(1.1);
+    animation: cycleSize 0.8s infinite linear alternate;
     background-color: #26252A;
 }
 
@@ -394,6 +410,7 @@ div#rightButtonContainer svg {
 
 .hidden{
     transform: translate(-50%, -50%) scale(0) !important;
+    opacity: 0 !important;
 }
 
 div#darkOverlay{
@@ -406,11 +423,13 @@ div#darkOverlay{
 .center-popup{
     position: fixed;
     transform: translate(-50%, -50%);
+    opacity: 1;
     top: 50%;
     left: 50%;
 }
 
 div#recommendationPopUp{
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
     font-size: 1.2rem;
     width: min(80vw, 60ch);
     border-radius: 0.5em;
