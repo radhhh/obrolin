@@ -128,7 +128,7 @@ div.chatsection.ai.playing h3 > button svg{
 }
 
 div.chatsection.playing h3 > button svg{
-    animation: cycleSize 0.8s infinite linear alternate;
+    animation: cycleSize 0.5s infinite linear alternate;
 }
 
 div.chatsection.user.playing h3{
@@ -294,7 +294,7 @@ button#voiceInputButton > svg{
 
 button#voiceInputButton.recording,
 button#voiceInputButton.recording:hover{
-    animation: cycleSize 0.8s infinite linear alternate;
+    animation: cycleSize 0.5s infinite linear alternate;
     background-color: #26252A;
 }
 
@@ -413,19 +413,20 @@ div#rightButtonContainer svg {
     opacity: 0 !important;
 }
 
-div#darkOverlay{
-    z-index: 200;
-    width: 100%;
-    height: 100%;
-    background-color: hsla(220, 69%, 5%, 0.5);
-}
-
 .center-popup{
     position: fixed;
     transform: translate(-50%, -50%);
     opacity: 1;
     top: 50%;
     left: 50%;
+}
+
+div#darkOverlay{
+    transition: opacity 0.2s ease-out;
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    background-color: hsla(220, 69%, 5%, 0.5);
 }
 
 div#recommendationPopUp{

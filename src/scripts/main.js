@@ -91,22 +91,21 @@ function addRecListener(elementList, recommendationList){
 async function refreshRecommendation(signal){
     selectedRecommendation = undefined;
     recommendationList = undefined;
-    let validRequest = true;
+    let abortStatus = false;
     display.clearRecommendation();
     signal.addEventListener('abort', () => {
-        validRequest = false;
+        abortStatus = true;
         console.log("aborting...");
     });
     try{
         recommendationList = await gpt.generateRecommendation(query.getKeyList());
-        if(validRequest){
-            let recommendationElements = display.generateRecommendationElements(recommendationList);
-            recommendationElements = addRecListener(recommendationElements, recommendationList);
-            display.appendRecommendation(recommendationElements);
-        }
+        if(abortStatus) throw "Aborted Request";
+        let recommendationElements = display.generateRecommendationElements(recommendationList);
+        recommendationElements = addRecListener(recommendationElements, recommendationList);
+        display.appendRecommendation(recommendationElements);
     }
     catch(err){
-        display.appendRecommendation([]);
+        if(err != "Aborted Request") display.appendRecommendation([]);
     }
 }
 

@@ -5,6 +5,11 @@ const darkOverlay = document.getElementById('darkOverlay');
 const questionContainer = document.getElementById('recommendationQuestionContainer');
 const main = document.querySelector('main');
 
+setTimeout(() => {
+    darkOverlay.style.display = "block";
+    recommendationPopUp.style.display = "block";
+}, 500)
+
 export function getState(query){
     switch(query){
         case "popUpOpen":
