@@ -1,5 +1,5 @@
 const synth = window.speechSynthesis;
-const utterance = new SpeechSynthesisUtterance();
+window.utterance = new SpeechSynthesisUtterance();
 let selectedVoice = synth.getVoices().filter((list) => list.lang == "id")[0];
 let isPlaying = false;
 let currentPlayingElement = undefined;
@@ -15,11 +15,17 @@ export function initElement(element, button, text){
         }
         else{
             stopSpeak();
-            currentPlayingElement = element;
-            startSpeak(text);
+            setTimeout(() => {
+                currentPlayingElement = element;
+                startSpeak(text);
+            }, 200);
         }
     });
 }
+
+utterance.addEventListener('boundary', (e) => {
+    console.log(e);
+});
 
 utterance.addEventListener('end', () => {
     isPlaying = false;
@@ -41,7 +47,4 @@ function stopSpeak(){
     if(!isPlaying) return;
     synth.resume();
     synth.cancel();
-    isPlaying = false;
-    currentPlayingElement.classList.remove('playing');
-    currentPlayingElement = undefined;
 }

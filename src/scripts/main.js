@@ -121,7 +121,7 @@ function askQuestion(){
     query.clear();
     display.clearKeyword();
     chatHistory.push(`${recommendationList[selectedRecommendation]}`);
-    display.addUserChat(`<span>${recommendationList[selectedRecommendation]}</span>`, chatIndex);
+    display.addUserChat(`${recommendationList[selectedRecommendation]}`, chatIndex);
     activateChatSpeak(chatIndex++);
     setTimeout(async () => {
         const freezeChatIndex = chatIndex++;
@@ -130,15 +130,11 @@ function askQuestion(){
         try{
             const gptResponse = await gpt.askQuestion(recommendationList[selectedRecommendation]);
             const finalResponse = gptResponse.split('\n')
-            .filter((line) => (line !== ""))
-            .map((line) => {
-                const whitespaceCount = line.search(/\S|$/);
-                return `<div>${'\u00a0'.repeat(whitespaceCount)+line.slice(whitespaceCount)}</div>\n`;
-            })
-            .join('');
-            chatHistory[freezeChatIndex] = gptResponse;
+            .filter(line => (line !== ""))
+            .join(' ');
+            chatHistory[freezeChatIndex] = finalResponse;
             activateChatSpeak(freezeChatIndex);
-            display.updateChatContent(`<span>${finalResponse}</span>`, freezeChatIndex);
+            display.updateChatContent(`${finalResponse}`, freezeChatIndex);
         }
         catch(error){
             chatHistory[freezeChatIndex] = "Error, silakan coba lagi";
