@@ -2,6 +2,7 @@ const synth = window.speechSynthesis;
 window.utterance = new SpeechSynthesisUtterance();
 let selectedVoice = synth.getVoices().filter((list) => list.lang == "id")[0];
 let isPlaying = false;
+let textLength, currentWord;
 let currentPlayingElement = undefined;
 
 synth.addEventListener('voiceschanged', () => {
@@ -24,27 +25,45 @@ export function initElement(element, button, text){
 }
 
 utterance.addEventListener('boundary', (e) => {
-    console.log(e);
+    if(currentWord < textLength-1){
+        resetHighlightWord(currentPlayingElement, currentWord);
+        highlightWord(currentPlayingElement, ++currentWord);
+    }
 });
 
 utterance.addEventListener('end', () => {
-    isPlaying = false;
-    currentPlayingElement.classList.remove('playing');
-    currentPlayingElement = undefined;
+    stopSpeak();
 });
+
+function highlightWord(targetElement, index){
+    targetElement.querySelector(`.word-${index}`).style.backgroundColor = "black";
+}
+
+function resetHighlightWord(targetElement, index){
+    targetElement.querySelector(`.word-${index}`).removeAttribute('style');
+}
 
 
 function startSpeak(text){
     utterance.text = text;
     utterance.voice = selectedVoice;
     utterance.lang = "id";
+    textLength = text.split(" ").length;
+    console.log(textLength);
     isPlaying = true;
     currentPlayingElement.classList.add('playing');
+    currentWord = 0;
+    highlightWord(currentPlayingElement, currentWord);
     synth.speak(utterance);
 }
 
 function stopSpeak(){
-    if(!isPlaying) return;
+    if(!isPlaying || currentPlayingElement === undefined) return;
+    resetHighlightWord(currentPlayingElement, currentWord);
     synth.resume();
     synth.cancel();
+    isPlaying = false;
+    currentPlayingElement.classList.remove('playing');
+    currentPlayingElement = undefined;
+    currentWord = 0;
 }

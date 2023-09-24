@@ -121,7 +121,7 @@ function askQuestion(){
     query.clear();
     display.clearKeyword();
     chatHistory.push(`${recommendationList[selectedRecommendation]}`);
-    display.addUserChat(`${recommendationList[selectedRecommendation]}`, chatIndex);
+    display.addUserChat(`${recommendationList[selectedRecommendation].split(" ").map((word, index) => `<span class="word-${index}">${word}</span>`).join(" ")}`, chatIndex);
     activateChatSpeak(chatIndex++);
     setTimeout(async () => {
         const freezeChatIndex = chatIndex++;
@@ -129,12 +129,11 @@ function askQuestion(){
         display.addGPTChat("<div class='dot-flashing blue' style='margin: auto;'></div>", freezeChatIndex);
         try{
             const gptResponse = await gpt.askQuestion(recommendationList[selectedRecommendation]);
-            const finalResponse = gptResponse.split('\n')
-            .filter(line => (line !== ""))
-            .join(' ');
+            const finalResponse = gptResponse.trim().replace(/\s+/g, ' ');
+            const htmlResponse = finalResponse.split(" ").map((word, index) => `<span class="word-${index}">${word}</span>`).join(" ");
             chatHistory[freezeChatIndex] = finalResponse;
             activateChatSpeak(freezeChatIndex);
-            display.updateChatContent(`${finalResponse}`, freezeChatIndex);
+            display.updateChatContent(`${htmlResponse}`, freezeChatIndex);
         }
         catch(error){
             chatHistory[freezeChatIndex] = "Error, silakan coba lagi";
