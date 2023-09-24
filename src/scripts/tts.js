@@ -41,7 +41,7 @@ function highlightWord(targetElement, index){
 }
 
 function resetHighlightWord(targetElement, index){
-    targetElement.querySelector(`.word-${index}`).classlist.remove('highlight');
+    targetElement.querySelector(`.word-${index}`).classList.remove('highlight');
 }
 
 
