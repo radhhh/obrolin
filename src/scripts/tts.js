@@ -3,6 +3,7 @@ window.utterance = new SpeechSynthesisUtterance();
 let selectedVoice = synth.getVoices().filter((list) => list.lang == "id")[0];
 let isPlaying = false;
 let textLength, currentWord;
+let boundaryList;
 let currentPlayingElement = undefined;
 
 synth.addEventListener('voiceschanged', () => {
@@ -25,8 +26,7 @@ export function initElement(element, button, text){
 }
 
 utterance.addEventListener('boundary', (e) => {
-    if(e.charIndex == 0) return;
-    if(currentWord < textLength-1){
+    while(currentWord < textLength-1 && boundaryList[currentWord] < e.charIndex){
         resetHighlightWord(currentPlayingElement, currentWord);
         highlightWord(currentPlayingElement, ++currentWord);
     }
@@ -37,11 +37,11 @@ utterance.addEventListener('end', () => {
 });
 
 function highlightWord(targetElement, index){
-    targetElement.querySelector(`.word-${index}`).style.backgroundColor = "hsl(220, 71%, 20%)";
+    targetElement.querySelector(`.word-${index}`).classList.add('highlight');
 }
 
 function resetHighlightWord(targetElement, index){
-    targetElement.querySelector(`.word-${index}`).removeAttribute('style');
+    targetElement.querySelector(`.word-${index}`).classlist.remove('highlight');
 }
 
 
@@ -50,7 +50,10 @@ function startSpeak(text){
     utterance.voice = selectedVoice;
     utterance.lang = "id";
     textLength = text.split(" ").length;
-    console.log(textLength);
+    boundaryList = [];
+    for(let i = 0; i < text.length; i++){
+        if(text.charAt(i) == " ") boundaryList.push(i);
+    }
     isPlaying = true;
     currentPlayingElement.classList.add('playing');
     currentWord = 0;
@@ -67,4 +70,5 @@ function stopSpeak(){
     currentPlayingElement.classList.remove('playing');
     currentPlayingElement = undefined;
     currentWord = 0;
+    boundaryList = [];
 }
