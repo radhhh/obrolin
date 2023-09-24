@@ -25,6 +25,7 @@ export function initElement(element, button, text){
 }
 
 utterance.addEventListener('boundary', (e) => {
+    if(e.charIndex == 0) return;
     if(currentWord < textLength-1){
         resetHighlightWord(currentPlayingElement, currentWord);
         highlightWord(currentPlayingElement, ++currentWord);
@@ -36,7 +37,7 @@ utterance.addEventListener('end', () => {
 });
 
 function highlightWord(targetElement, index){
-    targetElement.querySelector(`.word-${index}`).style.backgroundColor = "black";
+    targetElement.querySelector(`.word-${index}`).style.backgroundColor = "hsl(220, 71%, 20%)";
 }
 
 function resetHighlightWord(targetElement, index){
