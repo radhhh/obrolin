@@ -75,8 +75,9 @@ function reset(){
 function addRecListener(elementList, recommendationList){
     elementList.forEach((element, index) => {
         element.addEventListener('click', (e) => {
-            if(!(e.target.classList.contains('recommendation') || 
-            e.target.classList.contains('content'))) return;
+            if(e.target.nodeName.toLowerCase() == "button" ||
+            e.target.nodeName.toLowerCase() == "svg" || 
+            e.target.nodeName.toLowerCase() == "path") return;
             if(selectedRecommendation !== undefined){
                 display.unselectRecommendation(selectedRecommendation);
             }
@@ -150,15 +151,21 @@ stt.report.addEventListener('result', (e) => {
 // initializing all buttons
 voiceInputButton.addEventListener('click', () => {
     if(voiceInputButton.classList.contains('recording')){
-        voiceInputButton.classList.remove('recording');
-        stt.stop();
-        voiceInputButton.blur();
-        textInput.focus();
+        try{
+            stt.stop();
+            voiceInputButton.classList.remove('recording');
+            voiceInputButton.blur();
+            textInput.focus();
+        }
+        catch{}
     }
     else{
-        voiceInputButton.classList.add('recording');
-        if(textInput.value !== '') addKeyword();
-        stt.start();
+        try{
+            stt.start();
+            voiceInputButton.classList.add('recording');
+            if(textInput.value !== '') addKeyword();
+        }
+        catch{}
     }
 });
 

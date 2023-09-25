@@ -32,7 +32,7 @@ utterance.addEventListener('boundary', (e) => {
     }
 });
 
-utterance.addEventListener('end', () => {
+utterance.addEventListener('end', (e) => {
     stopSpeak();
 });
 
