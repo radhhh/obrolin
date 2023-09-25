@@ -444,7 +444,8 @@ div#darkOverlay{
     background-color: hsla(220, 69%, 5%, 0.5);
 }
 
-div#recommendationPopUp{
+div.content-popup{
+    max-height: 90vh;
     transition: transform 0.2s ease-out, opacity 0.2s ease-out;
     font-size: 1.2rem;
     width: min(80vw, 60ch);
@@ -453,6 +454,10 @@ div#recommendationPopUp{
     padding: 1.2em 1em 1em;
     background-color: #FBFBFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.149) inset;
+}
+
+div#recommendationPopUp{
+    overflow-y: scroll;
 }
 
 div#recommendationPopUp > h3{
@@ -557,7 +562,49 @@ div#centerButtons > button{
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
+/* Information Pop Up */
 
+div#informationPopUp{
+    text-align: left;
+    overflow-y: scroll;
+}
+
+div#informationPopUp .content{
+    max-height: 100%;
+}
+
+div#informationPopUp h3{
+    margin-top: 1em;
+}
+
+div#informationPopUp h1{
+    font-weight: 900;
+    font-size: 2em;
+}
+
+div#informationPopUp p{
+    margin-top: 1em;
+}
+
+div#informationPopUp li{
+    list-style-position: inside;
+}
+
+div#informationPopUp button#informationCloseButton{
+    display: block;
+    margin: 2em 0 0 0;
+    width: 100%;
+    padding: 0.4em 0.5em;
+    color: #FBFBFF;
+    background-color: #2D68DC;
+    border-radius: 0.4em;
+    border: none;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+div#informationPopUp button#informationCloseButton:hover{
+    background-color: hsl(220, 71%, 40%);
+}
 /* Animation Part */
 
 #recommendationPopUp .dot-flashing{

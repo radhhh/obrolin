@@ -4,11 +4,19 @@ const recommendationPopUp = document.getElementById('recommendationPopUp');
 const darkOverlay = document.getElementById('darkOverlay');
 const questionContainer = document.getElementById('recommendationQuestionContainer');
 const main = document.querySelector('main');
+const informationPopUp = document.getElementById('informationPopUp');
 
-setTimeout(() => {
-    darkOverlay.style.display = "block";
-    recommendationPopUp.style.display = "block";
-}, 500)
+window.onload = () => {
+    setTimeout(() => {
+        darkOverlay.style.display = "block";
+        recommendationPopUp.style.display = "block";
+        informationPopUp.style.display = "block";
+        setTimeout(() => {
+            showInformationPopUp();
+            toggleOverlay()
+        }, 200)
+    }, 300)
+}
 
 export function getState(query){
     switch(query){
@@ -16,7 +24,17 @@ export function getState(query){
             return !(recommendationPopUp.classList.contains('hidden'));
         case "popUpLoaded":
             return recommendationPopUp.classList.contains('loaded');
+        case "informationOpen":
+            return !(informationPopUp.classList.contains('hidden'));
     }
+}
+
+export function showInformationPopUp(){
+    informationPopUp.classList.remove('hidden');
+}
+
+export function hideInformationPopUp(){
+    informationPopUp.classList.add('hidden');
 }
 
 export function appendKeyword(newKeyword){

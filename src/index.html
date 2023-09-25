@@ -12,7 +12,7 @@
     <header>
         <div class="container">
             <h1>Obrolin.</h1>
-            <button>
+            <button id="informationShowButton">
                 <svg width="35" height="35" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Info Square">
                     <path id="Info-Square-2" fill-rule="evenodd" clip-rule="evenodd" d="M29.4628 0.249573H13.5402C5.37168 0.249573 0.250432 5.3347 0.250432 13.5372V18.4714C0.248307 19.3682 0.975057 20.0971 1.87181 20.0971H1.87606H1.89518C2.78131 20.0971 3.50168 19.3788 3.50168 18.4906V18.4523V13.5372C3.50168 7.07082 7.07168 3.50082 13.5381 3.50082H29.4628C35.9504 3.50082 39.4992 7.07082 39.4992 13.5372V29.4747C39.4992 35.9411 35.9292 39.4919 29.4628 39.4919H13.5402C7.05468 39.4919 3.50381 35.9219 3.50381 29.4747C3.50381 28.5779 2.77493 27.8491 1.87818 27.8491C0.979307 27.8491 0.252557 28.5779 0.252557 29.4747C0.250432 37.6666 5.33343 42.7496 13.5189 42.7496H29.4628C37.6674 42.7496 42.7504 37.6666 42.7504 29.4811V13.5436C42.7504 5.3347 37.6674 0.249573 29.4628 0.249573ZM21.4887 31.1596C20.609 31.1596 19.895 30.4456 19.895 29.5659V20.1734C19.895 19.2936 20.609 18.5796 21.4887 18.5796C22.3685 18.5796 23.0825 19.2936 23.0825 20.1734V29.5659C23.0825 30.4456 22.3685 31.1596 21.4887 31.1596ZM21.4894 15.027H21.5106C22.3904 15.027 23.1044 14.313 23.1044 13.4333C23.1044 12.5535 22.3904 11.8395 21.5106 11.8395C20.6309 11.8395 19.9063 12.5535 19.9063 13.4333C19.9063 14.313 20.6096 15.027 21.4894 15.027Z"/>
@@ -55,7 +55,7 @@
         </div>
     </section>
     <div id="darkOverlay" class="center-popup hidden" style="display: none;"></div>
-    <div id="recommendationPopUp" class="center-popup hidden" style="display: none;">
+    <div id="recommendationPopUp" class="center-popup content-popup hidden" style="display: none;">
         <h3>Kata kunci</h3>
         <div id="recommendationKeywordContainer">
         </div>
@@ -70,6 +70,40 @@
                 <button id="submitButton">Tanya</button>
             </div>
         </div>
+    </div>
+    <div id="informationPopUp" class="center-popup content-popup hidden" style="display: none;">
+        <div class="content">
+            <h1>Obrolin.</h1>
+            <p>
+                Obrolin adalah website pembantu penyandang disleksia dalam mencari informasi.
+                Dengan menggunakan AI GPT 3.5, kami menyediakan pengalaman tanya-jawab yang
+                inklusif bagi penyandang disleksia supaya dapat mudah dalam mendapatkan pengetahuan
+                dari internet.
+            </p>
+            <h3>Fitur Utama</h3>
+            <ul>
+                <li>Sistem rekomendasi pertanyaan yang berbasis kata kunci dari pengguna</li>
+                <li>Jawaban pertanyaan yang akurat dengan menggunakan kecerdasan buatan</li>
+                <li>Pengenalan suara secara real-time untuk memasukkan kata kunci</li>
+                <li>Sistem pengubah teks-ke-suara guna memudahkan aksesibilitas pengguna</li>
+            </ul>
+            <h3>Limitasi</h3>
+            <ul>
+                <li>    
+                    AI dapat memberikan informasi yang kurang akurat sehingga diperlukan pengecekan ulang
+                    di sumber lainnya untuk memastikan kebenaran informasi.
+                </li>
+                <li>
+                    AI hanya memiliki pengetahuan sebelum September 2021 dan tidak memiliki
+                    informasi untuk kejadian yang berlangsung setelahnya.
+                </li>
+                <li>
+                    Fitur aksesibilitas seperti pengenalan suara hanya didukung di peramban Google Chrome pada Windows. Pastikan telah 
+                    <a href="https://support.microsoft.com/id-id/windows/paket-bahasa-untuk-windows-a5094319-a92d-18de-5b53-1cfc697cfca8">menginstall support bahasa Indonesia</a> di pengaturan sistem dengan fitur pengenalan suara terpasang.
+                </li>
+            </ul>
+        </div>
+        <button id="informationCloseButton">Lanjutkan</button>
     </div>
 </body>
 </html>

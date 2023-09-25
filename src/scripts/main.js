@@ -19,6 +19,8 @@ const cancelButton = document.getElementById('cancelButton');
 const refreshButton = document.getElementById('refreshButton');
 const submitButton = document.getElementById('submitButton');
 const textInput = document.getElementById('textInput');
+const informationShowButton = document.getElementById('informationShowButton');
+const informationCloseButton = document.getElementById('informationCloseButton');
 
 function addKeywordListener(element, keywordIndex){
     element.addEventListener('click', (e) => {
@@ -47,6 +49,7 @@ function addKeyword(){
 }
 
 async function sendKeyword(){
+    if(display.getState('popUpOpen') || display.getState('informationOpen')) return;
     addKeyword();
     if(query.getKeyList().length == 0) return;
     const queryElementList = query.generateElementList();
@@ -149,6 +152,18 @@ stt.report.addEventListener('result', (e) => {
 })
 
 // initializing all buttons
+
+informationCloseButton.addEventListener('click', () => {
+    display.hideInformationPopUp();
+    display.toggleOverlay();
+})
+
+informationShowButton.addEventListener('click', () => {
+    if(display.getState("popUpOpen")) return;
+    display.showInformationPopUp();
+    display.toggleOverlay();
+})
+
 voiceInputButton.addEventListener('click', () => {
     if(voiceInputButton.classList.contains('recording')){
         try{
@@ -184,13 +199,21 @@ submitButton.addEventListener('click', () => {
 });
 
 window.addEventListener('keydown', (e) => {
-    if(display.getState('popUpOpen')){
+    if(display.getState('informationOpen')){
+        switch(e.key){
+            case 'Escape':
+                informationCloseButton.dispatchEvent(new Event('click'));
+                break;
+        }
+    }
+    else if(display.getState('popUpOpen')){
         switch(e.key){
             case 'Escape':
                 cancelButton.dispatchEvent(new Event('click'));
+                break;
         }
     }
-    if(display.getState('popUpLoaded')){
+    else if(display.getState('popUpLoaded')){
         switch(e.key){
             case 'ArrowUp':
                 e.preventDefault();
