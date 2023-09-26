@@ -10,7 +10,7 @@ let recommendationList = undefined;
 let selectedRecommendation = undefined;
 let chatIndex = 0;
 const controller = new AbortController();
-let signal = controller.signal;
+const signal = controller.signal;
 
 const voiceInputButton = document.getElementById('voiceInputButton');
 const plusButton = document.getElementById('plusButton');
@@ -153,6 +153,10 @@ stt.report.addEventListener('result', (e) => {
 
 // initializing all buttons
 
+function clickButton(targetElement){
+    targetElement.dispatchEvent(new Event('click'));
+}
+
 informationCloseButton.addEventListener('click', () => {
     display.hideInformationPopUp();
     display.toggleOverlay();
@@ -202,36 +206,34 @@ window.addEventListener('keydown', (e) => {
     if(display.getState('informationOpen')){
         switch(e.key){
             case 'Escape':
-                informationCloseButton.dispatchEvent(new Event('click'));
+                clickButton(informationCloseButton);
                 break;
         }
     }
-    else if(display.getState('popUpOpen')){
+    if(display.getState('popUpOpen')){
         switch(e.key){
             case 'Escape':
-                cancelButton.dispatchEvent(new Event('click'));
+                clickButton(cancelButton);
                 break;
         }
     }
-    else if(display.getState('popUpLoaded')){
+    if(display.getState('popUpLoaded')){
         switch(e.key){
             case 'ArrowUp':
                 e.preventDefault();
-                document.getElementById(`recommendation-${selectedRecommendation !== undefined ? (selectedRecommendation + 4) % 5 : 0}`)
-                    .dispatchEvent(new Event('click'));
+                clickButton(document.getElementById(`recommendation-${selectedRecommendation !== undefined ? (selectedRecommendation + 4) % 5 : 0}`));
                 break;
             case 'ArrowDown':
                 e.preventDefault();
-                document.getElementById(`recommendation-${selectedRecommendation !== undefined ? (selectedRecommendation + 1) % 5 : 0}`)
-                    .dispatchEvent(new Event('click'));
+                clickButton(document.getElementById(`recommendation-${selectedRecommendation !== undefined ? (selectedRecommendation + 1) % 5 : 0}`));
                 break;
             case 'Enter':
                 e.preventDefault();
-                submitButton.dispatchEvent(new Event('click'));
+                clickButton(submitButton);
                 break;
             case 'r':
                 e.preventDefault();
-                refreshButton.dispatchEvent(new Event('click'));
+                clickButton(refreshButton);
                 break;
             case '1':
             case '2':
@@ -239,7 +241,7 @@ window.addEventListener('keydown', (e) => {
             case '4':
             case '5':
                 e.preventDefault();
-                document.getElementById(`recommendation-${parseInt(e.key) - 1}`).dispatchEvent(new Event('click'));
+                clickButton(document.getElementById(`recommendation-${parseInt(e.key) - 1}`));
                 break;
         }
     }
@@ -247,6 +249,7 @@ window.addEventListener('keydown', (e) => {
         switch(e.key){
             case 'Enter':
                 e.preventDefault();
+                if(voiceInputButton.classList.contains('recording')) clickButton(voiceInputButton);
                 if(textInput.value === ''){
                     sendKeyword();
                 }
