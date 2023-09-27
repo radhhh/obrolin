@@ -63,7 +63,7 @@ button svg path#Info-Square-2{
 }
 
 button:hover svg path#Info-Square-2{
-    fill: #2D68DC;
+    fill: #111b98;
 }
 
 main{
@@ -124,7 +124,7 @@ div.chatsection.user.playing h3 > button svg{
 
 div.chatsection.ai h3 > button:hover svg,
 div.chatsection.ai.playing h3 > button svg{
-    filter: invert(44%) sepia(13%) saturate(5402%) hue-rotate(196deg) brightness(84%) contrast(107%);
+    filter: invert(14%) sepia(86%) saturate(2877%) hue-rotate(233deg) brightness(84%) contrast(118%);
 }
 
 div.chatsection.playing h3 > button svg{
@@ -138,7 +138,7 @@ div.chatsection.user.playing h3{
 
 div.chatsection.ai.playing h3{
     font-weight: 900;
-    color: #2D68DC;
+    color: #111b98;
 }
 
 
@@ -217,7 +217,7 @@ div.chatbox.ai > div.left-box > div,
 div.chatbox.ai > div.right-box > div,
 div.chatbox.ai > div.content
 {
-    background-color: #2D68DC;
+    background-color: #111b98;
 }
 
 div.content div{
@@ -243,15 +243,19 @@ span[class |= "word"]{
 }
 
 div.chatbox.ai .highlight{
-    background-color: hsl(220, 71%, 20%);
+    background-color: hsl(236, 80%, 10%);
 }
 
 div.chatbox.user .highlight{
-    background-color: hsl(220, 71%, 40%);
+    background-color: hsl(236, 80%, 30%);
 }
 
 div.recommendation .highlight{
-    background-color: hsl(220, 71%, 20%);
+    background-color: hsl(236, 80%, 10%);
+}
+
+div.recommendation.selected .highlight{
+    background-color: hsl(236, 80%, 40%);
 }
 
 /* Input Section */
@@ -269,7 +273,7 @@ section#inputContainer{
 }
 
 section#inputContainer button:hover{
-    background-color: hsl(220, 71%, 40%);
+    background-color: hsl(236, 80%, 40%);
 }
 
 button#voiceInputButton{
@@ -280,8 +284,8 @@ button#voiceInputButton{
     height: 5em;
     flex-shrink: 0;
     border-radius: 10px 48.5px 10px 10px;
-    border: 1px solid #2D68DC;
-    background-color: #2D68DC;
+    border: 1px solid #111b98;
+    background-color: #111b98;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 }
 
@@ -325,20 +329,20 @@ div#middleInputContainer > textarea{
     padding: 0.6em 0.5em 0.4em;
     width: 100%;
     border-radius: 10px;
-    border: 1px solid #2D68DC;
-    background: #2D68DC;
+    border: 1px solid #111b98;
+    background: #111b98;
     box-sizing: border-box;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
     resize: none;
 }
 
 div#middleInputContainer textarea:hover{
-    background-color: hsl(220, 71%, 48%);
+    background-color: hsl(236, 80%, 48%);
 }
 
 div#middleInputContainer textarea:focus{
     outline: none;
-    background: #2D68DC;
+    background: #111b98;
 }
 
 div#middleInputContainer > div#keywordContainer{
@@ -353,7 +357,7 @@ div#middleInputContainer > div#keywordContainer{
     padding: 0.3em 0.8em;
     width: max(5ch, fit-content);
     margin: 0 0.3em 0.15em 0;
-    background: #2D68DC;
+    background: #111b98;
     border-radius: 0.7em;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
     border: none;
@@ -364,7 +368,7 @@ div#keywordContainer .keyword{
 }
 
 div#keywordContainer .keyword:hover{
-    background-color: hsl(220, 71%, 40%);
+    background-color: hsl(236, 80%, 40%);
 }
 
 div#keywordContainer .keyword .keyword-close{
@@ -372,12 +376,12 @@ div#keywordContainer .keyword .keyword-close{
 }
 
 div#keywordContainer .keyword.select-mode{
-    background-color: hsl(220, 71%, 30%);
-    color: hsl(220, 71%, 48%);
+    background-color: hsl(236, 80%, 30%);
+    color: hsl(236, 80%, 48%);
 }
 
 div#keywordContainer .keyword.select-mode:hover{
-    background-color: hsl(220, 71%, 20%);
+    background-color: hsl(236, 80%, 20%);
 }
 
 div#keywordContainer .keyword.select-mode .keyword-close{
@@ -413,7 +417,7 @@ div#rightButtonContainer > button{
     border: none;
     height: 2.5em;
     width: 2.5em;
-    background-color: #2D68DC;
+    background-color: #111b98;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 }
 
@@ -475,7 +479,7 @@ div.recommendation{
     cursor: pointer;
     font-size: 1rem;
     color: #FBFBFF;
-    background-color: #2D68DC;
+    background-color: #111b98;
     padding: 0.5em 0.7em;
     border-radius: 0.5em;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
@@ -486,12 +490,12 @@ div.recommendation:not(:last-child){
 }
 
 div.recommendation:hover{
-    background-color: hsl(220, 71%, 40%);
+    background-color: hsl(236, 80%, 40%);
 }
 
 div.recommendation.selected{
-    background-color: hsl(220, 71%, 30%);
-    outline: hsl(220, 71%, 20%) 2px solid;
+    background-color: hsl(236, 80%, 10%);
+    outline: hsl(236, 80%, 20%) 2px solid;
 }
 
 div.recommendation div.content{
@@ -509,10 +513,11 @@ div.recommendation button.recommendation-speak svg{
     filter: invert(100%) sepia(1%) saturate(7404%) hue-rotate(57deg) brightness(87%) contrast(164%);
     height: 1em;
     width: auto;
+    color: #757df0;
 }
 
 div.recommendation.playing button.recommendation-speak svg{
-    filter: invert(11%) sepia(3%) saturate(2176%) hue-rotate(211deg) brightness(91%) contrast(89%);
+    filter: invert(58%) sepia(38%) saturate(5966%) hue-rotate(213deg) brightness(100%) contrast(89%);
 }
 
 div#actionButtons{
@@ -533,7 +538,7 @@ button#refreshButton{
 }
 
 button#refreshButton:hover{
-    color: hsl(220, 71%, 40%);
+    color: hsl(236, 80%, 40%);
 }
 
 .loaded button#refreshButton{
@@ -541,7 +546,7 @@ button#refreshButton:hover{
 }
 
 div#centerButtons button:hover{
-    background-color: hsl(220, 71%, 40%);
+    background-color: hsl(236, 80%, 40%);
 }
 
 div#centerButtons{
@@ -555,7 +560,7 @@ div#centerButtons > button{
     color: #FBFBFF;
     width: 12ch;
     height: 1.8em;
-    background-color: #2D68DC;
+    background-color: #111b98;
     border-radius: 0.2em;
     border: none;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
@@ -596,14 +601,14 @@ div#informationPopUp button#informationCloseButton{
     width: 100%;
     padding: 0.4em 0.5em;
     color: #FBFBFF;
-    background-color: #2D68DC;
+    background-color: #111b98;
     border-radius: 0.4em;
     border: none;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 }
 
 div#informationPopUp button#informationCloseButton:hover{
-    background-color: hsl(220, 71%, 40%);
+    background-color: hsl(236, 80%, 40%);
 }
 /* Animation Part */
 
@@ -616,8 +621,8 @@ div#informationPopUp button#informationCloseButton:hover{
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: #2D68DC;
-    color: #2D68DC;
+    background-color: #111b98;
+    color: #111b98;
     animation: dot-flashing 0.6s infinite linear alternate;
     animation-delay: 0.3s;
 }
@@ -638,8 +643,8 @@ div#informationPopUp button#informationCloseButton:hover{
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: #2D68DC;
-    color: #2D68DC;
+    background-color: #111b98;
+    color: #111b98;
     animation: dot-flashing 0.6s infinite alternate;
     animation-delay: 0s;
 }
@@ -649,15 +654,15 @@ div#informationPopUp button#informationCloseButton:hover{
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: #2D68DC;
-    color: #2D68DC;
+    background-color: #111b98;
+    color: #111b98;
     animation: dot-flashing 0.6s infinite alternate;
     animation-delay: 0.6s;
 }
   
 @keyframes dot-flashing {
     0% {
-      background-color: #2D68DC;
+      background-color: #111b98;
     }
     50%, 100% {
       background-color: rgba(152, 128, 255, 0.2);
@@ -679,6 +684,6 @@ div.content > div.dot-flashing.blue{
         background-color: #FBFBFF;
     }
     50%, 100% {
-        background-color: hsl(220, 71%, 80%);
+        background-color: hsl(236, 80%, 80%);
     }
 }
