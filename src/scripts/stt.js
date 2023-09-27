@@ -2,10 +2,11 @@ let speechSupported = true;
 let recognition;
 
 try{
+    if(!('speechRecognition' in window || 'webkitSpeechRecognition' in window)) throw "not supported";
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     recognition = new SpeechRecognition();
     recognition.interimResults = true;
-    recognition.continuous = true;
+    recognition.continuous = false;
     recognition.lang = "id";
 }
 catch(e){
