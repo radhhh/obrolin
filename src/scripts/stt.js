@@ -1,4 +1,7 @@
 let speechSupported = true;
+let isSpeaking = false;
+let previousText = "";
+let currentText = "";
 let recognition;
 
 try{
@@ -17,18 +20,33 @@ catch(e){
 export const report = new EventTarget();
 if(speechSupported){   
     recognition.addEventListener('result', (e) => {
-        let transcript = Array.from(e.results)
-                                .map(val => val[0].transcript)
-                                .join('')
-                                .toLocaleLowerCase();
-        report.dispatchEvent(new CustomEvent("result", { detail: transcript }));
+        currentText = Array.from(e.results)
+                            .map(val => val[0].transcript)
+                            .join('')
+                            .toLocaleLowerCase();
+        console.log("result", previousText);
+        console.log(currentText);
+        report.dispatchEvent(new CustomEvent("result", { detail: previousText + " " + currentText }));
     });
+    recognition.addEventListener('end', (e) => {
+        if(isSpeaking){
+            console.log("end", previousText);
+            console.log(currentText);
+            previousText = previousText + " " + currentText;
+            currentText = "";
+            start();
+        }
+    })
 }
 
 export function start(){
+    isSpeaking = true;
     recognition.start();
 }
     
 export function stop(){
-    recognition.stop()
+    isSpeaking = false;
+    currentText = "";
+    previousText = "";
+    recognition.stop();
 }
