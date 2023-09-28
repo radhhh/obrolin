@@ -31,6 +31,25 @@
         height: 3em;
     }
 
+    @keyframes cycleSize {
+        0% {
+            transform: scale(1.0);
+        }
+        50% {
+            transform: scale(1.02);
+        }
+        100%{
+            transform: scale(1.04);
+        }
+    }
+
+    button#voiceInputButton svg{
+        width: 1.8em;
+        height: auto;
+        top: 0;
+        right: 0;
+    }
+
     div#middleInputContainer{
         grid-area: textInput;
     }
@@ -43,5 +62,12 @@
         border-radius: 50%;
         grid-area: sendButton;
         width: 100%;
+    }
+
+    button#sendButton svg{
+        width: 2em;
+        height: auto;
+        top: 0;
+        left: 0;
     }
 }

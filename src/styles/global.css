@@ -69,7 +69,8 @@ div#darkOverlay{
 }
 
 div.content-popup{
-    max-height: 90vh;
+    max-height: 93vh;
+    box-sizing: border-box;
     transition: transform 0.2s ease-out, opacity 0.2s ease-out;
     font-size: 1.2rem;
     width: min(80vw, 60ch);
