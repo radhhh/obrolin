@@ -1,0 +1,184 @@
+div.chatsection{
+    font-size: 1.2rem;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+}
+
+div.chatsection.user{
+    justify-content: flex-end;
+    padding-left: 1em;
+}
+
+div.chatsection.ai{
+    justify-content: flex-start;
+    padding-right: 1em;
+}
+div.chatsection h3{
+    color: #8E8D94;
+    font-size: 0.9rem;
+    font-weight: 900;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.827px; 
+    margin-left: 2em;
+    margin-bottom: 0.3em;
+}
+
+div.chatsection h3 > button{
+    display: none;
+    top: 0.3em;
+    background-color: inherit;
+    border: none;
+    height: 1.2em;
+}
+
+div.chatsection.loaded h3 > button{
+    display: inline-block;
+}
+
+div.chatsection h3 > button > svg{
+    filter: invert(59%) sepia(7%) saturate(230%) hue-rotate(209deg) brightness(93%) contrast(94%);
+    height: 1.4em;
+}
+
+div.chatsection.user h3 > button:hover svg,
+div.chatsection.user.playing h3 > button svg{
+    filter: invert(10%) sepia(5%) saturate(1214%) hue-rotate(211deg) brightness(97%) contrast(89%);
+}
+
+div.chatsection.ai h3 > button:hover svg,
+div.chatsection.ai.playing h3 > button svg{
+    filter: invert(14%) sepia(86%) saturate(2877%) hue-rotate(233deg) brightness(84%) contrast(118%);
+}
+
+div.chatsection.playing h3 > button svg{
+    animation: cycleSize 0.5s infinite linear alternate;
+}
+
+div.chatsection.user.playing h3{
+    font-weight: 900;
+    color: #26252A;
+}
+
+div.chatsection.ai.playing h3{
+    font-weight: 900;
+    color: #111b98;
+}
+
+
+div.chatbox{
+    color: #FBFBFF;
+    font-size: 1.2rem;
+    display: flex;
+    width: fit-content;
+    max-width: 75ch;
+}
+
+div.chatbox > div.content{
+    padding: 0.6em 0 0.6em;
+    min-width: 15ch;
+    line-height: 1.5;
+    flex: 1;
+}
+
+div.chatbox > div.content *:not(:first-child){
+    margin-top: 0.5em;
+}
+
+div.chatbox > div.content ol, 
+div.chatbox > div.content ul{
+    margin-left: 1em;
+}
+
+div.chatbox > div.left-box{
+    display: flex;
+    flex-direction: column;
+    width: 1.5em;
+    align-items: flex-end;
+}
+
+div.chatbox > div.right-box{
+    display: flex;
+    flex-direction: column;
+    width: 1.5em;
+    align-items: flex-start;
+}
+
+div.middle-left, div.middle-right{
+    width: 1em;
+    flex: 1;
+}
+
+div.upper-left, 
+div.lower-left, 
+div.upper-right, 
+div.lower-right{
+    height: 1em;
+    width: 1em;
+}
+
+div.upper-left{
+    border-radius: 1em 0px 0px 0px; 
+}
+div.upper-right{
+    border-radius: 0px 1em 0px 0px;
+}
+div.lower-right{
+    border-radius: 0px 0em 1em 0px;
+}
+div.lower-left{
+    border-radius: 0px 0em 0px 1em;
+}
+
+div.chatbox.user > div.left-box > div,
+div.chatbox.user > div.right-box > div, 
+div.chatbox.user > div.content
+{
+    background-color: #26252A;
+}
+
+div.chatbox.ai > div.left-box > div,
+div.chatbox.ai > div.right-box > div,
+div.chatbox.ai > div.content
+{
+    background-color: #111b98;
+}
+
+div.content div{
+    width: 100%;
+}
+
+div.chatbox svg{
+    position: absolute;
+    bottom: 1px;
+    width: 1.5em;
+}
+
+div.chatbox.ai svg{
+    left: -1px;
+}
+
+div.chatbox.user svg{
+    right: -1px;
+}
+
+span[class |= "word"]{
+    transition: background-color 0.2s linear;
+}
+
+div.chatbox.ai .highlight{
+    background-color: hsl(236, 80%, 10%);
+}
+
+div.chatbox.user .highlight{
+    background-color: hsl(236, 80%, 30%);
+}
+
+div.recommendation .highlight{
+    background-color: hsl(236, 80%, 10%);
+}
+
+div.recommendation.selected .highlight{
+    background-color: hsl(236, 80%, 40%);
+}

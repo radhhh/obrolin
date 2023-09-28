@@ -1,0 +1,184 @@
+section#inputContainer{
+    display: flex;
+    position: fixed;
+    align-items: flex-end;
+    gap: 0.6em;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #FBFBFF;
+    padding: 1.2em 1.5em 1.2em;
+}
+
+section#inputContainer button:hover{
+    background-color: hsl(236, 80%, 25%);
+}
+
+button#voiceInputButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5em;
+    height: 5em;
+    flex-shrink: 0;
+    border-radius: 10px 48.5px 10px 10px;
+    border: 1px solid #111b98;
+    background-color: #111b98;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+button#voiceInputButton > svg{
+    display: block;
+    position: relative;
+    top: 0.1em;
+    right: 0.1em;
+    width: 2.2em;
+    height: auto;
+    padding: 5.417px 10.833px;
+}
+
+@keyframes cycleSize {
+    0% {
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(1.06);
+    }
+    100%{
+        transform: scale(1.12);
+    }
+}
+
+button#voiceInputButton.recording,
+button#voiceInputButton.recording:hover{
+    animation: cycleSize 0.5s infinite linear alternate;
+    background-color: #26252A;
+}
+
+div#middleInputContainer{
+    flex: 1;
+}
+
+div#textInputContainer{
+    font-size: 1.2rem;
+    display: flex;
+    height: fit-content;
+    box-sizing: content-box;
+    background-color: #111b98;
+    border: 1px solid #111b98;
+    padding: 0 0.5em;
+    gap: 0.5em;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    border-radius: 10px;
+    cursor: text;
+}
+
+div#textInputContainer textarea{
+    flex: 1;
+    display: block;
+    height: 1.3em;
+    width: 100%;
+    margin: 0.6em 0em 0.4em;
+    font-size: inherit;
+    letter-spacing: 0.5px;
+    color: #FBFBFF;
+    background: none;
+    border: none;
+    resize: none;
+}
+
+div#textInputContainer textarea:focus{
+    outline: none;
+    background: none;
+}
+
+div#textInputContainer div#plusButtonContainer{
+    display: flex;
+    align-items: flex-end;
+    margin: 0.5em 0;
+}
+
+div#textInputContainer button#plusButton{
+    height: fit-content;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+button#plusButton svg{
+    width: auto;
+    height: 1.2em;
+    opacity: 0.8;
+    display: block;
+}
+
+button#plusButton svg:hover{
+    opacity: 0.9;
+}
+
+div#middleInputContainer > div#keywordContainer{
+    width: 100%;
+    margin-bottom: 0.3em;
+}
+
+div#keywordContainer .keyword{
+    cursor: pointer;
+}
+
+div#keywordContainer .keyword:hover{
+    background-color: hsl(236, 80%, 28%);
+}
+
+div#keywordContainer .keyword .keyword-close{
+    display: none;
+}
+
+div#keywordContainer .keyword.select-mode{
+    background-color: hsl(236, 80%, 25%);
+    color: hsl(236, 80%, 48%);
+}
+
+div#keywordContainer .keyword.select-mode:hover{
+    background-color: hsl(236, 80%, 20%);
+}
+
+div#keywordContainer .keyword.select-mode .keyword-close{
+    text-align: center;
+    color: #FBFBFF;
+    font-weight: 900;
+    opacity: 1;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+div#keywordContainer .keyword .keyword-close svg{
+    top: 0.1em;
+    height: 1em;
+    width: 1em;
+}
+
+button#sendButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5em;
+    height: 5em;
+    flex-shrink: 0;
+    border-radius: 48.5px 10px 10px 10px;
+    border: 1px solid #111b98;
+    background-color: #111b98;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+button#sendButton svg {
+    width: 2.8em;
+    top: 0.15em;
+    left: 0.15em;
+    height: auto;
+}

@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+
+* {
+    font-family: 'Comic Neue';
+    font-weight: 700;
+    font-size: 1em;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    text-decoration-style: none;
+}
+
+:root{
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body, html{
+    background-color: #FBFBFF;
+    min-height: 100%;
+    width: 100%;
+}
+
+body{
+    padding-top: 5em;
+    padding-bottom: 7em;
+}
+
+main{
+    padding: 0 2em;
+}
+
+strong{
+    font-weight: 900;
+}
+
+.hidden{
+    transform: translate(-50%, -50%) scale(0) !important;
+    opacity: 0 !important;
+}
+
+.center-popup{
+    position: fixed;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    top: 50%;
+    left: 50%;
+}
+
+.keyword{
+    color: #FBFBFF;
+    font-size: 1.1rem;
+    display: inline-block;
+    padding: 0.25em 0.7em;
+    width: max(5ch, fit-content);
+    margin: 0 0.3em 0.15em 0;
+    background: #111b98;
+    border-radius: 0.7em;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    border: none;
+}
+
+div#darkOverlay{
+    transition: opacity 0.2s ease-out;
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    background-color: hsla(220, 69%, 5%, 0.5);
+}
+
+div.content-popup{
+    max-height: 90vh;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    font-size: 1.2rem;
+    width: min(80vw, 60ch);
+    border-radius: 0.5em;
+    z-index: 300;
+    padding: 1.2em 1em 1em;
+    background-color: #FBFBFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.149) inset;
+}

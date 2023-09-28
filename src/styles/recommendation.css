@@ -1,0 +1,106 @@
+div#recommendationPopUp{
+    overflow-y: scroll;
+}
+
+div#recommendationPopUp > h3{
+    margin-bottom: 0.2em;
+}
+
+div#recommendationPopUp > div{
+    margin-bottom: 0.5em;
+}
+
+div.recommendation{
+    display: flex;
+    gap: 0.5em;
+    font-size: 1.1rem;
+    align-items: stretch;
+    cursor: pointer;
+    color: #FBFBFF;
+    background-color: #111b98;
+    padding: 0.45em 0.6em 0.35em;
+    border-radius: 0.5em;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+div.recommendation:not(:last-child){
+    margin-bottom: 0.5em;
+}
+
+div.recommendation:hover{
+    background-color: hsl(236, 80%, 40%);
+}
+
+div.recommendation.selected{
+    background-color: hsl(236, 80%, 10%);
+    outline: hsl(236, 80%, 20%) 2px solid;
+}
+
+div.recommendation div.content{
+    flex: 1;
+}
+
+div.recommendation button.recommendation-speak{
+    top: 0.15em;
+    display: block;
+    background-color: inherit;
+    border: none;
+}
+
+div.recommendation button.recommendation-speak svg{
+    filter: invert(100%) sepia(1%) saturate(7404%) hue-rotate(57deg) brightness(87%) contrast(164%);
+    height: 1em;
+    width: auto;
+    color: #757df0;
+}
+
+div.recommendation.playing button.recommendation-speak svg{
+    filter: invert(58%) sepia(38%) saturate(5966%) hue-rotate(213deg) brightness(100%) contrast(89%);
+}
+
+div#actionButtons{
+    margin-top: 0.8em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+button#refreshButton{
+    display: none;
+    font-size: 1rem;
+    background-color: #FBFBFF;
+    box-shadow: none;
+    border: none;
+    text-decoration: underline;
+}
+
+button#refreshButton:hover{
+    color: hsl(236, 80%, 40%);
+}
+
+.loaded button#refreshButton{
+    display: block;
+}
+
+div#centerButtons button:hover{
+    background-color: hsl(236, 80%, 40%);
+}
+
+div#centerButtons{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+div#centerButtons > button{
+    font-size: 1rem;
+    color: #FBFBFF;
+    width: 12ch;
+    height: 1.8em;
+    background-color: #111b98;
+    border-radius: 0.2em;
+    border: none;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}

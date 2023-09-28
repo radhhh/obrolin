@@ -3,7 +3,13 @@ import * as display from './display.js';
 import * as gpt from './ai.js';
 import * as tts from './tts.js';
 import * as stt from './stt.js';
-import "../style.css";
+import "../styles/global.css";
+import "../styles/header.css";
+import "../styles/content.css"
+import "../styles/input.css"
+import "../styles/recommendation.css"
+import "../styles/info.css"
+import "../styles/animation.css"
 
 let chatHistory = [];
 let recommendationList = undefined;
@@ -131,7 +137,7 @@ function askQuestion(){
     setTimeout(async () => {
         const freezeChatIndex = chatIndex++;
         chatHistory.push('loading');
-        display.addGPTChat("<div class='dot-flashing blue' style='margin: auto;'></div>", freezeChatIndex);
+        display.addGPTChat("<div class='dot-container'><div class='dot-flashing blue' style='margin: auto;'></div></div>", freezeChatIndex);
         try{
             const gptResponse = await gpt.askQuestion(recommendationList[selectedRecommendation]);
             const finalResponse = gptResponse.trim().replace(/\s+/g, ' ');

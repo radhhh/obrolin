@@ -1,0 +1,48 @@
+header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1em 2em;
+    box-sizing: border-box;
+    background-color: #FBFBFF;
+    color: #26252A;;
+}
+
+header > div.container{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1{
+    font-weight: 900;
+    font-size: 2.3rem;
+    top: 0.05em;
+    cursor: default;
+}
+
+header button{
+    display: block;
+    box-sizing: border-box;
+    border: none;
+    background-color: #FBFBFF;
+    height: fit-content;
+}
+
+header button svg{
+    display: block;
+    width: 35px;
+    height: 35px;
+}
+
+button svg path#Info-Square-2{
+    fill: #26252A;
+}
+
+button:hover svg path#Info-Square-2{
+    fill: #111b98;
+}
