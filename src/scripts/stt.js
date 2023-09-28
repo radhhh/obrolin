@@ -24,14 +24,10 @@ if(speechSupported){
                             .map(val => val[0].transcript)
                             .join('')
                             .toLocaleLowerCase();
-        console.log("result", previousText);
-        console.log(currentText);
         report.dispatchEvent(new CustomEvent("result", { detail: previousText + " " + currentText }));
     });
     recognition.addEventListener('end', (e) => {
         if(isSpeaking){
-            console.log("end", previousText);
-            console.log(currentText);
             previousText = previousText + " " + currentText;
             currentText = "";
             start();

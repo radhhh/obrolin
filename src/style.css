@@ -40,7 +40,7 @@ header{
 header > div.container{
     display: flex;
     width: 100%;
-    height: 100%;
+    height: fit-content;
     box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
@@ -48,16 +48,23 @@ header > div.container{
 
 header h1{
     font-weight: 900;
-    font-size: 2rem;
+    font-size: 2.3rem;
+    top: 0.05em;
     cursor: default;
 }
 
 header button{
-    top: 0.4em;
     display: block;
     box-sizing: border-box;
     border: none;
     background-color: #FBFBFF;
+    height: fit-content;
+}
+
+header button svg{
+    display: block;
+    width: 35px;
+    height: 35px;
 }
 
 button svg path#Info-Square-2{
@@ -94,7 +101,7 @@ div.chatsection.ai{
 }
 div.chatsection h3{
     color: #8E8D94;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 900;
     font-style: normal;
     line-height: normal;
@@ -276,7 +283,7 @@ section#inputContainer{
 }
 
 section#inputContainer button:hover{
-    background-color: hsl(236, 80%, 40%);
+    background-color: hsl(236, 80%, 25%);
 }
 
 button#voiceInputButton{
@@ -324,28 +331,63 @@ div#middleInputContainer{
     flex: 1;
 }
 
-div#middleInputContainer > textarea{
+div#textInputContainer{
+    font-size: 1.2rem;
+    display: flex;
+    height: fit-content;
+    box-sizing: content-box;
+    background-color: #111b98;
+    border: 1px solid #111b98;
+    padding: 0 0.5em;
+    gap: 0.5em;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    border-radius: 10px;
+    cursor: text;
+}
+
+div#textInputContainer textarea{
+    flex: 1;
+    display: block;
+    height: 1.3em;
+    width: 100%;
+    margin: 0.6em 0em 0.4em;
+    font-size: inherit;
     letter-spacing: 0.5px;
     color: #FBFBFF;
-    height: 2.5em;
-    font-size: 1rem;
-    padding: 0.6em 0.5em 0.4em;
-    width: 100%;
-    border-radius: 10px;
-    border: 1px solid #111b98;
-    background: #111b98;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    background: none;
+    border: none;
     resize: none;
 }
 
-div#middleInputContainer textarea:hover{
-    background-color: hsl(236, 80%, 48%);
+div#textInputContainer textarea:focus{
+    outline: none;
+    background: none;
 }
 
-div#middleInputContainer textarea:focus{
-    outline: none;
-    background: #111b98;
+div#textInputContainer div#plusButtonContainer{
+    display: flex;
+    align-items: flex-end;
+    margin: 0.5em 0;
+}
+
+div#textInputContainer button#plusButton{
+    height: fit-content;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+button#plusButton svg{
+    width: auto;
+    height: 1.2em;
+    opacity: 0.8;
+    display: block;
+}
+
+button#plusButton svg:hover{
+    opacity: 0.9;
 }
 
 div#middleInputContainer > div#keywordContainer{
@@ -355,9 +397,9 @@ div#middleInputContainer > div#keywordContainer{
 
 .keyword{
     color: #FBFBFF;
-    font-size: 1.0rem;
+    font-size: 1.1rem;
     display: inline-block;
-    padding: 0.3em 0.8em;
+    padding: 0.25em 0.7em;
     width: max(5ch, fit-content);
     margin: 0 0.3em 0.15em 0;
     background: #111b98;
@@ -371,7 +413,7 @@ div#keywordContainer .keyword{
 }
 
 div#keywordContainer .keyword:hover{
-    background-color: hsl(236, 80%, 40%);
+    background-color: hsl(236, 80%, 28%);
 }
 
 div#keywordContainer .keyword .keyword-close{
@@ -379,7 +421,7 @@ div#keywordContainer .keyword .keyword-close{
 }
 
 div#keywordContainer .keyword.select-mode{
-    background-color: hsl(236, 80%, 30%);
+    background-color: hsl(236, 80%, 25%);
     color: hsl(236, 80%, 48%);
 }
 
@@ -406,26 +448,24 @@ div#keywordContainer .keyword .keyword-close svg{
     width: 1em;
 }
 
-div#rightButtonContainer{
+button#sendButton{
     display: flex;
-    width: 5.4em;
-    gap: 0.4em;
-}
-
-div#rightButtonContainer > button{
-    display: flex;
-    align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    border: none;
-    height: 2.5em;
-    width: 2.5em;
+    align-items: center;
+    width: 5em;
+    height: 5em;
+    flex-shrink: 0;
+    border-radius: 48.5px 10px 10px 10px;
+    border: 1px solid #111b98;
     background-color: #111b98;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 }
 
-div#rightButtonContainer svg {
-    width: 1.2em;
+button#sendButton svg {
+    width: 2.8em;
+    top: 0.1em;
+    left: 0.1em;
+    height: auto;
 }
 
 /* Pop Up Section */
@@ -478,13 +518,12 @@ div#recommendationPopUp > div{
 div.recommendation{
     display: flex;
     gap: 0.5em;
-    font-size: 1.2em;
+    font-size: 1.1rem;
     align-items: stretch;
     cursor: pointer;
-    font-size: 1rem;
     color: #FBFBFF;
     background-color: #111b98;
-    padding: 0.5em 0.7em;
+    padding: 0.45em 0.6em 0.35em;
     border-radius: 0.5em;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 }

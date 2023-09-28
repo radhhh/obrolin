@@ -21,6 +21,7 @@ const submitButton = document.getElementById('submitButton');
 const textInput = document.getElementById('textInput');
 const informationShowButton = document.getElementById('informationShowButton');
 const informationCloseButton = document.getElementById('informationCloseButton');
+const textInputContainer = document.getElementById('textInputContainer');
 
 function addKeywordListener(element, keywordIndex){
     element.addEventListener('click', (e) => {
@@ -186,6 +187,10 @@ voiceInputButton.addEventListener('click', () => {
         }
         catch{}
     }
+});
+
+textInputContainer.addEventListener('click', (e) => {
+    if(e.target === textInputContainer) textInput.focus();
 });
 
 plusButton.addEventListener('click', addKeyword);
