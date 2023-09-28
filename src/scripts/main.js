@@ -10,6 +10,7 @@ import "../styles/input.css"
 import "../styles/recommendation.css"
 import "../styles/info.css"
 import "../styles/animation.css"
+import "../styles/responsive.css"
 
 let chatHistory = [];
 let recommendationList = undefined;
