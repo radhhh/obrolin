@@ -24,6 +24,14 @@ div#informationPopUp li{
     list-style-position: inside;
 }
 
+div#informationPopUp iframe{
+    width: min(72vw, 54ch);
+    height: min(40.5vw, 30.375ch);
+    margin: auto;
+    margin-top: 1em;
+    display: block;
+}
+
 div#informationPopUp button#informationCloseButton{
     display: block;
     margin: 2em 0 0 0;
