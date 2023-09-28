@@ -49,7 +49,7 @@ function addKeyword(){
     if(textInput.value === ''){
         return;
     }
-    const keywordIndex = query.addKeyword(textInput.value);
+    const keywordIndex = query.addKeyword(textInput.value.trim());
     let keywordElement = query.generateSingleHTML(textInput.value, true, keywordIndex);
     addKeywordListener(keywordElement, keywordIndex);
     display.appendKeyword(keywordElement);
@@ -128,7 +128,7 @@ function activateChatSpeak(chatIndex){
 }
 
 function askQuestion(){
-    textInput.focus();
+    document.activeElement.blur();
     clearPopUp();
     query.clear();
     display.clearKeyword();
