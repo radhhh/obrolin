@@ -1,4 +1,4 @@
-const awioawkoaakwoa = "SpLiT663NSPTC5qxp55eSlo4pT3BlbkFJWB8PHWq1vsRvSjVAS0Fi";
+const awioawkoaakwoa = "SpLiTproj-1p2UVpX-eLaH8nFxxIteu3BQkkB4JvqACPDQvM7irxMH-6kDPKg3WCc_2GLwhhMRUS0gQ6xKbJT3BlbkFJKOiGP80R8ntFlR6jYXqsow6kZbeMSw_esISzJV-GyPYi87psBqhI7HMT83Hq5rP3yrak-Z7gIA";
 
 const response1 = [
     "Ini pertanyaan 1",
