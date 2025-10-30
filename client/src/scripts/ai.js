@@ -2,6 +2,7 @@ export async function generateRecommendation(keywordList){
     try{
         const response = await fetch("/api/recommend", {
             method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(keywordList)
         });
         if(!response.ok) {
