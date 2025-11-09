@@ -135,8 +135,16 @@ function askQuestion(){
         chatHistory.push('loading');
         display.addGPTChat("<div class='dot-container'><div class='dot-flashing blue' style='margin: auto;'></div></div>", freezeChatIndex);
         const gptResponse = await gpt.askQuestion(selectedRecommendation);
-        const finalResponse = gptResponse.trim().replace(/\s+/g, ' ');
-        const htmlResponse = finalResponse.split(" ").map((word, index) => `<span class="word-${index}">${word}</span>`).join(" ");
+        const finalResponse = gptResponse.trim()
+                                        .replace(/ +/g, ' ')
+                                        .replace(/\t+/g, ' ');
+        const htmlResponse = finalResponse.split('\n')
+                                        .map(paragraph => {
+                                            const finalParagraph = paragraph.split(" ")
+                                                                    .map((word, index) => `<span class="word-${index}">${word}</span>`)
+                                                                    .join(" ")
+                                            return `<p>${finalParagraph}</p>`
+                                        }).join('\n');
         chatHistory[freezeChatIndex] = finalResponse;
         activateChatSpeak(freezeChatIndex);
         display.updateChatContent(`${htmlResponse}`, freezeChatIndex);

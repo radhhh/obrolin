@@ -13,18 +13,32 @@ const cache = new LRUCache({
 
 
 router.post("/recommend", async (req, res) => {
-    const questions = await getQuestions(req.body);
-    cache.set(req.sid, { questions, at: Date.now() });
-    res.json(questions);
+    try {
+        const questions = await getQuestions(req.body);
+        cache.set(req.sid, { questions, at: Date.now() });
+        res.json(questions);
+    }
+    catch(err) {
+        console.error(err);
+        res.status(500).send('Internal server error')
+    }
 });
 
 router.get("/answer", async (req, res) => {
     if(cache.has(req.sid)) {
-        const { questions } = cache.get(req.sid);
-        const questionID = req.query["questionID"];
-        const answer = await getAnswer(questions[questionID]);
-        res.json({ answer });
-        cache.delete(req.sid);
+        try {
+            const { questions } = cache.get(req.sid);
+            const questionID = req.query["questionID"];
+            const answer = await getAnswer(questions[questionID]);
+            res.json({ answer });
+            cache.delete(req.sid);
+        }
+        catch {
+            res.status(500).send('Internal server error');
+        }
+    }
+    else {
+        res.status(408).send('Request timeout');
     }
 });
 
