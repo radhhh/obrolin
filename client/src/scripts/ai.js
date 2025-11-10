@@ -1,15 +1,18 @@
+let questionToken = undefined; 
+
 export async function generateRecommendation(keywordList){
     try{
         const response = await fetch("/api/recommend", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(keywordList)
+            body: JSON.stringify({ keywords: keywordList})
         });
         if(!response.ok) {
             throw new Error(`Response status ${response.status}`);
         }
-        const result = await response.json();
-        return result;
+        const { token, questions } = await response.json();
+        questionToken = token;
+        return questions;
     }
     catch (err) {
         console.error(err.message);
@@ -19,7 +22,11 @@ export async function generateRecommendation(keywordList){
 
 export async function askQuestion(questionID){
     try{
-        const response = await fetch(`/api/answer?questionID=${questionID}`);
+        const response = await fetch("/api/answer", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ index: questionID, token: questionToken })
+        });
         if(!response.ok) {
             throw new Error(`Response status ${response.status}`);
         }

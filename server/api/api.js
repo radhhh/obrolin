@@ -1,22 +1,33 @@
-require('dotenv').config();
-
 const express = require('express');
 const router = express.Router({ mergeParams: true });
+const crypto = require('crypto');
 const { getQuestions, getAnswer } = require('./provider.js');
+const SECRET = process.env.SECRET || 'secret-key'
 
-const { LRUCache } = require('lru-cache');
+function sign(payload) {
+  const data = Buffer.from(JSON.stringify(payload)).toString('base64url');
+  const sig = crypto.createHmac('sha256', SECRET).update(data).digest('base64url');
+  return `${data}.${sig}`;
+}
 
-const cache = new LRUCache({
-    max: 5000,
-    ttl: 60 * 60 * 1000,
-});
-
+function verify(token) {
+  const [data, sig] = token.split('.');
+  const expect = crypto.createHmac('sha256', SECRET).update(data).digest('base64url');
+  if (sig !== expect) return null;
+  return JSON.parse(Buffer.from(data, 'base64url').toString());
+}
 
 router.post("/recommend", async (req, res) => {
     try {
-        const questions = await getQuestions(req.body);
-        cache.set(req.sid, { questions, at: Date.now() });
-        res.json(questions);
+        const { keywords } = req.body;
+        const questions = await getQuestions(keywords);
+        const payload = {
+            questions,
+            iat: Date.now(),
+            ip: req.ip,          // optional bind
+        };
+        const token = sign(payload);
+        res.json({ questions, token });
     }
     catch(err) {
         console.error(err);
@@ -24,21 +35,26 @@ router.post("/recommend", async (req, res) => {
     }
 });
 
-router.get("/answer", async (req, res) => {
-    if(cache.has(req.sid)) {
-        try {
-            const { questions } = cache.get(req.sid);
-            const questionID = req.query["questionID"];
-            const answer = await getAnswer(questions[questionID]);
-            res.json({ answer });
-            cache.delete(req.sid);
+router.post("/answer", async (req, res) => {
+    try {
+        const { token, index } = req.body;
+        const payload = verify(token);
+        if(!payload) {
+            return res.status(400).send('Invalid token');
         }
-        catch {
-            res.status(500).send('Internal server error');
+        if(payload.ip && payload.ip !== req.ip) {
+            return res.status(403).send('Mismatched IP address');
         }
+
+        const question = payload.questions[index];
+        if(!question) {
+            return res.status(400).send('Invalid index');
+        }
+        const answer = await getAnswer(question);
+        res.json({ question, answer });
     }
-    else {
-        res.status(408).send('Request timeout');
+    catch {
+        res.status(500).send('Internal server error');
     }
 });
 

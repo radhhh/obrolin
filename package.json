@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "watch": "webpack --watch"
   },
   "keywords": [],
@@ -19,11 +19,13 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@netlify/functions": "^5.1.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "lru-cache": "^11.2.2",
     "openai": "^6.7.0",
+    "serverless-http": "^4.0.0",
     "zod": "^4.1.12"
   }
 }

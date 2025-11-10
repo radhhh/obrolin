@@ -26,9 +26,4 @@ app.use((req, res, next) => {
 
 app.use("/api", router);
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.listen(3000, (err) => {
-    if(err) console.log(err);
-    console.log("server started on port 3000");
-});
+module.exports = app;

@@ -3,18 +3,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: "development", 
-  entry: "./src/scripts/main.js",
+  entry: "./client/src/scripts/main.js",
   // devtool: "inline-source-map",
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, '../server/public'),
+    path: path.resolve(__dirname, './server/public'),
     clean: true,
     publicPath: '/'
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Obrolin',
-      template: './src/index.html'
+      template: './client/src/index.html'
     }),
   ],
   module: {
